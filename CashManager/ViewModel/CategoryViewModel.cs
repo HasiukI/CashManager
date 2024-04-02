@@ -1,8 +1,10 @@
 ﻿using CashManager.Model;
+using CashManager.Repository;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,15 +15,13 @@ namespace CashManager.ViewModel
 {
     internal class CategoryViewModel :ViewModelBase
     {
-        public CategoryViewModel() { 
-           
-           
-            List<Category> categories = new List<Category>();
+        private readonly DapperRepository _repository = null;
 
-            categories.Add(new Category() { Id = 1, Name = "ct1", Price = 100 });
-            categories.Add(new Category() { Id = 1, Name = "ct2", Price = 100 });
+        public CategoryViewModel() {
 
-            _categories = new ObservableCollection<Category>(categories);
+            string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
+            _repository = new DapperRepository(connectionString);
+            _categories = new ObservableCollection<Category>( _repository.GetAllCategory().Result);
         }
 
 
