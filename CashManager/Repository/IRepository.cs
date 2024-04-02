@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace CashManager.Repository
 {
-    internal interface IRepository
+     interface IRepository
     {
         #region Category
-        Task<IEnumerable<Category>> GetAllCategory();
+        public Task<IEnumerable<Category>> GetAllCategoryAsync();
+        public IEnumerable<Category> GetAllCategory();
         #endregion
     }
 }

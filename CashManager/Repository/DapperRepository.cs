@@ -1,37 +1,81 @@
 ﻿using CashManager.Model;
+using Dapper;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using Dapper;
-using System.Data.SqlClient;
 
 namespace CashManager.Repository
 {
     internal class DapperRepository : IRepository
     {
-        private readonly string _sqlConnection = String.Empty;
+        private string _connectionString = string.Empty;
 
-        public DapperRepository(string sqlConnection) { 
-            _sqlConnection = sqlConnection;
+        public DapperRepository(string connectionString) { 
+            _connectionString = connectionString;
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategory()
+
+        #region Category
+        public async Task<IEnumerable<Category>> GetAllCategoryAsync()
         {
             try
             {
-                using(var connection  = new SqlConnection(_sqlConnection))
+                using (var connection = new SqlConnection(_connectionString))
                 {
                     return await connection.QueryAsync<Category>("Select * from [Category];");
                 }
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return null;
             }
         }
+
+        public IEnumerable<Category> GetAllCategory()
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    return connection.Query<Category>("Select * from [Category];");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<int> CreateCategoryAsync(Category category)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    
+                    return await connection.QuerySingleAsync<int>("Insert [Category] OUTPUT INSERTED.Id values (@name,@isCosts,@price);",
+                        new
+                        {
+                            name=category.Name,
+                            isCosts= category.isCosts,
+                            price= category.Price,
+                        });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return -1;
+            }
+        }
+        #endregion
+
     }
 }
