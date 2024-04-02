@@ -7,6 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         >
+    <Window.Resources>
+        <Storyboard x:Key="ShowCategoryCreate">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="stackPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseCategoryCreate">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="stackPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="button" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
 
     <Window.DataContext>
         <local:CategoryViewModel/>
@@ -60,15 +82,36 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                    <StackPanel  Grid.Column="1">
-                        <Label>name</Label>
-                        <TextBox Text="{Binding NameCategory, Mode=TwoWay}"></TextBox>
-                        <Label>name</Label>
-                        <TextBox Text="{Binding PriceCategory,Mode=TwoWay}"></TextBox>
-                        <Label>isCosts</Label>
-                        <CheckBox IsChecked="{Binding IsCosts, Mode=TwoWay}"></CheckBox>
-                        <Button Command="{Binding CreateNewCategory}">add</Button>
-                    </StackPanel>
+                    <Grid x:Name="grid" Grid.Column="1">
+
+
+                        <Button x:Name="button" Content="+Category">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard Storyboard="{StaticResource ShowCategoryCreate}" />
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+
+
+                        <StackPanel  x:Name="stackPanel"  Grid.Column="1">
+                            <Label>name</Label>
+                            <TextBox Text="{Binding NameCategory, Mode=TwoWay}"></TextBox>
+                            <Label>name</Label>
+                            <TextBox Text="{Binding PriceCategory,Mode=TwoWay}"></TextBox>
+                            <Label>isCosts</Label>
+                            <CheckBox IsChecked="{Binding IsCosts, Mode=TwoWay}"></CheckBox>
+                            <Button Command="{Binding CreateNewCategory}">add</Button>
+                            <Button Content="Close">
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard Storyboard="{StaticResource CloseCategoryCreate}" />
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    
 
                 </Grid>
             </Grid>
