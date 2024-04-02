@@ -10,6 +10,8 @@ namespace CashManager.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool isCosts { get; set; }
         public int? Price { get; set; }
+       
     }
 }
