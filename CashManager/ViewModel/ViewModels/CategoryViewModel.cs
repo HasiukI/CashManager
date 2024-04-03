@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace CashManager.ViewModel
 {
-    internal class CategoryViewModel :ViewModelBase
+    internal class CategoryViewModel : ViewModelBase
     {
         private readonly DapperRepository _repository = null;
         public ObservableCollection<Category> Categories { get; }
@@ -22,13 +22,11 @@ namespace CashManager.ViewModel
         // Comands
         public ICommand CreateNewCategory { get; private set; }
 
-        public CategoryViewModel() {
+        public CategoryViewModel(string connectionString) {
 
-            string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
             _repository = new DapperRepository(connectionString);
 
             Categories = new ObservableCollection<Category>(_repository.GetAllCategory());
-
 
             CreateNewCategory = new AsyncCommand(CreateCategory);
         }
@@ -60,15 +58,7 @@ namespace CashManager.ViewModel
         public bool IsCostsCategory { get => _isCosts; set => _isCosts = value; }
 
 
-        private Category _curentCategory;
-
-        public Category CurentCategory {
-            get => _curentCategory; 
-            set { 
-                  _curentCategory = value;
-                onPropertyChanged(nameof(CurentCategory));
-            } 
-        }
+       
         //public ICommand CreateCategory
         //{
         //    get => new RelayCommand(() => Categories.Add(new Category() { Id = 1, Name = _nameCategory, Price = _priceCategory }));
