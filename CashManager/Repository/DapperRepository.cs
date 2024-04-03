@@ -3,6 +3,7 @@ using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -76,6 +77,28 @@ namespace CashManager.Repository
             }
         }
         #endregion
-
+        #region Cash
+        public async Task CreateCash(Cash cash)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    await connection.ExecuteAsync("Insert [Cash] values (@catId,@count,@date,@price);",
+                        new
+                        {
+                            catId = cash.CategoryId,
+                            count = cash.Count,
+                            date = cash.CreatedAt,
+                            price = cash.Price,
+                        });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
     }
 }

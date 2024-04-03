@@ -13,5 +13,8 @@ namespace CashManager.Repository
         public Task<IEnumerable<Category>> GetAllCategoryAsync();
         public IEnumerable<Category> GetAllCategory();
         #endregion
+        #region Cash
+        public Task CreateCash(Cash cash);
+        #endregion
     }
 }

@@ -155,9 +155,19 @@
 
         <Grid Grid.Column="1" Background="Blue">
             <StackPanel>
+                <Label>Name</Label>
                 <TextBlock Text="{Binding Cash.CurentCategory.Name, Mode=OneWay}"/>
-                <TextBlock Text="{Binding Cash.CurentCategory.Price, Mode=OneWay}"/>
-                <Button Content="SetPrice"/>
+                <Label>Price</Label>
+                <TextBox Text="{Binding Cash.CurentCategory.Price, Mode=OneWay}"/>
+                <Label>Count</Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Cash.CountCash}"></TextBlock>
+                    <Button Command="{Binding Cash.CountUpCash}">+</Button>
+                    <Button Command="{Binding Cash.CountDownCash}">-</Button>
+                </StackPanel>
+                <Label>Total</Label>
+                <TextBlock Text="{Binding Cash.TotalCash}"></TextBlock>
+                <Button Content="SetPrice" Command="{Binding Cash.CreateCashItem}"/>
             </StackPanel>
         </Grid>
         
