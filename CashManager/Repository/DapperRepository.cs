@@ -61,12 +61,14 @@ namespace CashManager.Repository
                 using (var connection = new SqlConnection(_connectionString))
                 {
                     
-                    return await connection.QuerySingleAsync<int>("Insert [Category] OUTPUT INSERTED.Id values (@name,@isCosts,@price);",
+                    return await connection.QuerySingleAsync<int>("Insert [Category] OUTPUT INSERTED.Id values (@name,@isCosts,@price,@color,@fileName);",
                         new
                         {
                             name=category.Name,
                             isCosts= category.isCosts,
                             price= category.Price,
+                            color = category.Color,
+                            fileName = category.ImageName
                         });
                 }
             }

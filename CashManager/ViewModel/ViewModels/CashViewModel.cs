@@ -33,7 +33,7 @@ namespace CashManager.ViewModel
 
         private void CountUp()
         {
-            TotalCash = _curentCategory.Price.Value * ++CountCash;
+            TotalCash = (int)_curentCategory.Price * ++CountCash;
             onPropertyChanged(nameof(TotalCash));
             onPropertyChanged(nameof(CountCash));
         }
@@ -42,7 +42,7 @@ namespace CashManager.ViewModel
         {
             if (CountCash > 1)
             {
-                TotalCash = _curentCategory.Price.Value * --CountCash;
+                TotalCash = (int)_curentCategory.Price * (--CountCash);
                 onPropertyChanged(nameof(TotalCash));
                 onPropertyChanged(nameof(CountCash));
             }
@@ -52,7 +52,7 @@ namespace CashManager.ViewModel
 
         private async Task CreateCash()
         {
-            Cash cash = new Cash() { Price = TotalCash, CategoryId=_curentCategory.Id, Count=CountCash, CreatedAt=DateTime.UtcNow};
+            Cash cash = new Cash() { Price = (int)TotalCash, CategoryId=_curentCategory.Id, Count=CountCash, CreatedAt=DateTime.UtcNow};
             await _repository.CreateCash(cash);
         }
 
@@ -67,13 +67,13 @@ namespace CashManager.ViewModel
             set
             {
                 _curentCategory = value;
-                TotalCash = _curentCategory.Price.Value;
+                TotalCash = _curentCategory.Price;
                 onPropertyChanged(nameof(TotalCash));
                 onPropertyChanged(nameof(CurentCategory));
             }
         }
 
 
-       public int TotalCash { get; private set; }
+       public decimal TotalCash { get; private set; }
     }
 }
