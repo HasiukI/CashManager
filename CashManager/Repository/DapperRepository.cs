@@ -25,14 +25,24 @@ namespace CashManager.Repository
 
 
         #region Category
-        public async Task<IEnumerable<Category>> GetAllCategoryAsync()
+
+
+        public IEnumerable<Category> LoadCategories()
         {
+            IEnumerable<Category> categories = null;
             try
             {
                 using (var connection = new SqlConnection(_connectionString))
                 {
-                    return await connection.QueryAsync<Category>("Select * from [Category];");
+                    categories = connection.Query<Category>("Select * from [Category];");
                 }
+
+                foreach (var category in categories)
+                {
+                    category.Image = ReadPicture(category.ImageName);
+                }
+
+                return categories;
             }
             catch (Exception ex)
             {
@@ -41,23 +51,12 @@ namespace CashManager.Repository
             }
         }
 
-        public IEnumerable<Category> GetAllCategory()
-        {
-            try
-            {
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    return connection.Query<Category>("Select * from [Category];");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-        }
 
-
+        /// <summary>
+        /// Created Category in db
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
         public async Task<int> CreateCategoryAsync(Category category)
         {
             try
@@ -83,10 +82,46 @@ namespace CashManager.Repository
                 return -1;
             }
         }
+
+        /// <summary>
+        /// if search in db created cash with this category category disabled but dont 
+        /// remove else delete
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public async Task DeleteCategoryAsync(Category category)
+        {
+            try
+            {
+                using(var connection = new SqlConnection(_connectionString))
+                {
+                    Cash cash = await connection.QueryFirstOrDefaultAsync<Cash>("Select * from [Cash] where [Cash].[Id] = @id",
+                        new { id = category.Id });
+
+                    if (cash == null)
+                    {
+                        await connection.ExecuteAsync("Delete from [Category] where [Category].Id =@Id;", new { Id = category.Id });
+                    }
+                    else
+                    {
+                        await connection.ExecuteAsync("  UPDATE [Category] SET [Category].IsActual = 0 WHERE [Category].Id = @Id;", new { Id = category.Id });
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         #region Cash
 
-        public async Task CreateCash(Cash cash)
+        /// <summary>
+        /// Create Cash in db 
+        /// </summary>
+        /// <param name="cash"></param>
+        /// <returns></returns>
+        public async Task CreateCashAsync(Cash cash)
         {
             try
             {
@@ -156,13 +191,37 @@ namespace CashManager.Repository
         #endregion
 
         #region Other
+        public List<BitmapImage> ReadAllStaticPictures()
+        {
+            List<BitmapImage> images = new List<BitmapImage>();
+
+            DirectoryInfo dir = new DirectoryInfo(GetRootDirectoryImages());
+            FileInfo[] files = dir.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                images.Add(new BitmapImage(new Uri(file.FullName, UriKind.Absolute)));
+            }
+
+            return images;
+        }
+
+        /// <summary>
+        /// Create Image for Category. In File
+        /// </summary>
+        /// <param name="nameImage"></param>
+        /// <returns>BitmapImage</returns>
         private BitmapImage ReadPicture(string nameImage)
         {
             DirectoryInfo dir = new DirectoryInfo(GetRootDirectoryImages());
             return new BitmapImage(new Uri($"{dir.FullName}//{nameImage}", UriKind.Absolute));
         }
 
-        private string GetRootDirectoryImages()
+        /// <summary>
+        /// Serch Directory with Images
+        /// </summary>
+        /// <returns>Directory name</returns>
+        public string GetRootDirectoryImages()
         {
             string dirrr = Directory.GetCurrentDirectory();
             return dirrr.Remove(dirrr.IndexOf("bin")) + "Images";

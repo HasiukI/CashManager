@@ -82,7 +82,7 @@
                     </Button.Triggers>
                 </Button>
 
-                <ListBox ItemsSource="{Binding Category.Categories}" SelectedItem="{Binding Cash.CurentCategory}">
+                <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding CurentCategory}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3"/>
@@ -105,7 +105,12 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <ListBox ItemsSource="{Binding History.Histories}">
+                <ListBox ItemsSource="{Binding Histories}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="10"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border>
@@ -118,6 +123,32 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+
+                <ListBox ItemsSource="{Binding TotalSumDays}" SelectedItem="{Binding SelectedDate}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="7" Width="300"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                   
+                   
+                    <ListBox.ItemTemplate>
+                     <DataTemplate>
+                            <StackPanel Width="40">
+                                <Label>+</Label>
+                                <TextBlock Text="{Binding TotalProfit}"></TextBlock>
+                                <Label>-</Label>
+                                <TextBlock Text="{Binding TotalCosts}"></TextBlock>
+                            </StackPanel>
+                            
+                     </DataTemplate>
+                 </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Orientation="Horizontal">
+                    <Button Command="{Binding PastMounth}">past</Button>
+                    <Button Command="{Binding NextMounth}">next </Button>
+                    <TextBlock Text="{Binding SelectedtDateTime.Date}"></TextBlock>
+                </StackPanel>
             </StackPanel>
         </Grid>
 
@@ -131,13 +162,13 @@
                     </Button.Triggers>
                 </Button>
                 <Label>name</Label>
-                <TextBox Text="{Binding Category.NameCategory, Mode=TwoWay}"></TextBox>
+                <TextBox Text="{Binding NameCategory, Mode=TwoWay}"></TextBox>
                 <Label>name</Label>
-                <TextBox Text="{Binding Category.PriceCategory,Mode=TwoWay}"></TextBox>
+                <TextBox Text="{Binding PriceCategory,Mode=TwoWay}"></TextBox>
                 <Label>isCosts</Label>
-                <CheckBox IsChecked="{Binding Category.IsCostsCategory, Mode=TwoWay}"></CheckBox>
+                <CheckBox IsChecked="{Binding IsCostsCategory, Mode=TwoWay}"></CheckBox>
 
-                <ListBox ItemsSource="{Binding Category.Colors}" SelectedItem="{Binding Category.ColorCategory}">
+                <ListBox ItemsSource="{Binding Colors}" SelectedItem="{Binding ColorCategory}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3"/>
@@ -152,7 +183,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <ListBox ItemsSource="{Binding Category.ImagesName}"  SelectedItem="{Binding Category.ImageCategory}">
+                <ListBox ItemsSource="{Binding Images}"  SelectedItem="{Binding ImageCategory}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3"/>
@@ -168,7 +199,7 @@
                 </ListBox>
 
 
-                <Button Command="{Binding Category.CreateNewCategory}">add</Button>
+                <Button Command="{Binding CreateNewCategory}">add</Button>
             </StackPanel>
         </Grid>
         <Grid x:Name="gridCashCreate" Background="LightBlue" Width="0" HorizontalAlignment="Right" Visibility="Hidden">
@@ -188,16 +219,17 @@
             <StackPanel Grid.Row="1">
                 <StackPanel>
                     <Label>category</Label>
-                    <TextBlock Text="{Binding Cash.CurentCategory.Name}"/>
+                    <TextBlock Text="{Binding CurentCategory.Name}"/>
                     <Label>price</Label>
-                    <TextBox Text="{Binding  Cash.CurentCategory.Price}"/>
+                    <TextBox Text="{Binding  CurentCategory.Price}"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="+" Command="{Binding Cash.CountUpCash}"/>
-                        <Button Content="-" Command="{Binding Cash.CountDownCash}"/>
+                        <Button Content="+" Command="{Binding CountUpCash}"/>
+                        <Button Content="-" Command="{Binding CountDownCash}"/>
                     </StackPanel>
                     <Label >Total Cash</Label>
-                    <TextBlock Text="{Binding Cash.TotalCash}"></TextBlock>
-                    <Button Content="create" Command="{Binding Cash.CreateCashItem}"/>
+                    <TextBlock Text="{Binding TotalCash}"></TextBlock>
+                    <Button Content="create" Command="{Binding CreateCashItem}"/>
+                    <Button Content="Delete Category"/>
                 </StackPanel>
             </StackPanel>
             

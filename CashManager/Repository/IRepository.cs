@@ -10,11 +10,11 @@ namespace CashManager.Repository
      interface IRepository
     {
         #region Category
-        public Task<IEnumerable<Category>> GetAllCategoryAsync();
-        public IEnumerable<Category> GetAllCategory();
+        public IEnumerable<Category> LoadCategories();
+        public Task DeleteCategoryAsync(Category category);
         #endregion
         #region Cash
-        public Task CreateCash(Cash cash);
+        public Task CreateCashAsync(Cash cash);
         #endregion
         #region History
         public IEnumerable<History> LoadHistory(DateTime date);

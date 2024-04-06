@@ -10,5 +10,6 @@ namespace CashManager.Model
     {
         public Category Category { get; set; }
         public Cash Cash { get; set; }
+
     }
 }
