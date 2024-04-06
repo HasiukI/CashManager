@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Exit.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
@@ -23,6 +27,11 @@
 
   <ItemGroup>
     <Folder Include="BllFile\" />
+    <Folder Include="ProgramImages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Exit.png" />
   </ItemGroup>
 
 </Project>

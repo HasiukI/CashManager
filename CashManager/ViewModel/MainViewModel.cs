@@ -35,6 +35,8 @@ namespace CashManager.ViewModel
         public ICommand CountDownCash { get; private set; }
         public ICommand NextMounth { get; private set; }
         public ICommand PastMounth { get; private set; }
+        public ICommand TapCosts { get; private set; }
+        public ICommand TapProfit { get; private set; }
 
         public MainViewModel()
         {
@@ -58,6 +60,8 @@ namespace CashManager.ViewModel
             CountDownCash = new Command(CountDown);
             NextMounth = new Command(NextMounthCheck);
             PastMounth = new Command(PastMounthCheck);
+            TapCosts = new Command(TapCostsCreateCategory);
+            TapProfit = new Command(TapProfitCreateCategory);
 
             CountCash = 1;
            
@@ -66,7 +70,16 @@ namespace CashManager.ViewModel
             Colors.Add("#fe4505");
             Colors.Add("#ffc117");
 
-           
+            _isCosts = true;
+        }
+
+        private void TapCostsCreateCategory()
+        {
+            _isCosts = true;
+        }
+        private void TapProfitCreateCategory()
+        {
+            _isCosts = false;
         }
 
         private void  NextMounthCheck()
@@ -143,7 +156,7 @@ namespace CashManager.ViewModel
                 return false;
             }
 
-            Category category = new Category() { isCosts = IsCostsCategory, Name = _nameCategory, Price = _priceCategory, Color = _colorCategory, IsActual = true };
+            Category category = new Category() { isCosts = _isCosts, Name = _nameCategory, Price = _priceCategory, Color = _colorCategory, IsActual = true };
 
             if (_colorCategory == null)
             {
@@ -180,7 +193,6 @@ namespace CashManager.ViewModel
         public int PriceCategory { get => _priceCategory; set => _priceCategory = value; }
 
         private bool _isCosts;
-        public bool IsCostsCategory { get => _isCosts; set => _isCosts = value; }
 
         private string _colorCategory;
         public string ColorCategory { get => _colorCategory; set => _colorCategory = value; }
@@ -255,7 +267,7 @@ namespace CashManager.ViewModel
 
             Histories.Add(new History() { Cash = cash, Category=_curentCategory });
 
-            var totalSumDay = TotalSumDays.Where(h => h.CurentDate.Date == _selectedDate.CurentDate).FirstOrDefault();
+            var totalSumDay = TotalSumDays.Where(h => h.CurentDate.Date == _selectedDate.CurentDate.Date).FirstOrDefault();
 
             if (_curentCategory.isCosts)
             {
