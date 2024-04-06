@@ -22,7 +22,17 @@ namespace CashManager
             InitializeComponent();
         }
 
-       
+        private void ListBoxItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            
+                // Запуск анімації для gridCashCreate
+                var storyboard = FindResource("ShowCreateCash") as Storyboard;
+                if (storyboard != null)
+                {
+                    Storyboard.SetTarget(storyboard, gridCashCreate);
+                    storyboard.Begin();
+                }
+            
+        }
     }
-   
 }

@@ -16,5 +16,8 @@ namespace CashManager.Repository
         #region Cash
         public Task CreateCash(Cash cash);
         #endregion
+        #region History
+        public IEnumerable<History> LoadHistory(DateTime date);
+        #endregion
     }
 }

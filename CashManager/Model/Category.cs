@@ -16,6 +16,7 @@ namespace CashManager.Model
         public string Color {  get; set; }
         public string ImageName { get; set; }
         public BitmapImage Image { get; set; }
+        public bool IsActual { get; set; }
        
     }
 }

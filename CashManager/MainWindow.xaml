@@ -32,6 +32,37 @@
                 <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
                 <DiscreteBooleanKeyFrame KeyTime="00:00:00.7000000" Value="True"/>
             </BooleanAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseCreateCash">
+            <BooleanAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=grid}" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
+                <DiscreteBooleanKeyFrame KeyTime="00:00:00.4000000" Value="True"/>
+            </BooleanAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowCreateCash">
+            <DoubleAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="297"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <BooleanAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=grid}" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
+                <DiscreteBooleanKeyFrame KeyTime="00:00:00.1000000" Value="False"/>
+            </BooleanAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
 
@@ -39,168 +70,10 @@
         <local:MainViewModel/>
     </Window.DataContext>
 
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25*"/>
-            <RowDefinition Height="48*"/>
-            <RowDefinition Height="362*"/>
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="1" Margin="0,47,0,0" Grid.RowSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid>
-                    <StackPanel>
-                        <TextBlock Text="{Binding CurentCategory.Name, Mode=OneWay}"/>
-                        <TextBlock Text="{Binding CurentCategory.Price, Mode=OneWay}"/>
-                    </StackPanel>
-                </Grid>
-                -->
-    <!--Category-->
-    <!--
-                <Grid Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    
-                    
-                    <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding CurentCategory}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Button Command="">
-                                    <TextBlock Text="{Binding Name}"/>
-                                </Button>
-                               
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-
-                    <Grid x:Name="grid" Grid.Column="1">
-
-
-                        <Button x:Name="button" Content="+Category">
-                            
-                        </Button>
-
-
-                        <StackPanel  x:Name="stackPanel"  Grid.Column="1">
-                            <Label>name</Label>
-                            <TextBox Text="{Binding NameCategory, Mode=TwoWay}"></TextBox>
-                            <Label>name</Label>
-                            <TextBox Text="{Binding PriceCategory,Mode=TwoWay}"></TextBox>
-                            <Label>isCosts</Label>
-                            <CheckBox IsChecked="{Binding IsCosts, Mode=TwoWay}"></CheckBox>
-                            <Button Command="{Binding CreateNewCategory}">add</Button>
-                            <Button Content="Close">
-                                -->
-    <!--<Button.Triggers>
-                                    <EventTrigger RoutedEvent="Button.Click">
-                                        <BeginStoryboard Storyboard="{StaticResource CloseCategoryCreate}" />
-                                    </EventTrigger>
-                                </Button.Triggers>-->
-    <!--
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                    
-
-                </Grid>
-            </Grid>
-        </Grid>
-
-        <Popup Placement="Right" Width="100" Height="100" PopupAnimation="Slide" AllowsTransparency="True" IsOpen="True">
-            <StackPanel  x:Name="stackPanel1"  Grid.Column="1" Background="Blue">
-                <Label>name</Label>
-                <TextBox Text="{Binding NameCategory, Mode=TwoWay}"></TextBox>
-                <Label>name</Label>
-                <TextBox Text="{Binding PriceCategory,Mode=TwoWay}"></TextBox>
-                <Label>isCosts</Label>
-                <CheckBox IsChecked="{Binding IsCosts, Mode=TwoWay}"></CheckBox>
-                <Button Command="{Binding CreateNewCategory}">add</Button>
-                <Button Content="Close">
-                   <Button.Triggers>
-              <EventTrigger RoutedEvent="Button.Click">
-                  <BeginStoryboard Storyboard="{StaticResource CloseCategoryCreate}" />
-              </EventTrigger>
-          </Button.Triggers>
-                </Button>
-            </StackPanel>
-        </Popup>
-    </Grid>-->
-
-
-    <!--<Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        
-        <Grid Background="BlueViolet">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
-            <StackPanel  x:Name="stackPanel1"  Grid.Column="1" >
-                <Label>name</Label>
-                <TextBox Text="{Binding Category.NameCategory, Mode=TwoWay}"></TextBox>
-                <Label>name</Label>
-                <TextBox Text="{Binding Category.PriceCategory,Mode=TwoWay}"></TextBox>
-                <Label>isCosts</Label>
-                <CheckBox IsChecked="{Binding Category.IsCostsCategory, Mode=TwoWay}"></CheckBox>
-                <Button Command="{Binding Category.CreateNewCategory}">add</Button>
-            </StackPanel>
-
-            <ListBox Grid.Row="1" ItemsSource="{Binding Category.Categories}" SelectedItem="{Binding Cash.CurentCategory}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Button Command="">
-                            <TextBlock Text="{Binding Name}"/>
-                        </Button>
-
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            
-        </Grid>
-
-        <Grid Grid.Column="1" Background="Blue">
-            <StackPanel>
-                <Label>Name</Label>
-                <TextBlock Text="{Binding Cash.CurentCategory.Name, Mode=OneWay}"/>
-                <Label>Price</Label>
-                <TextBox Text="{Binding Cash.CurentCategory.Price, Mode=OneWay}"/>
-                <Label>Count</Label>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Cash.CountCash}"></TextBlock>
-                    <Button Command="{Binding Cash.CountUpCash}">+</Button>
-                    <Button Command="{Binding Cash.CountDownCash}">-</Button>
-                </StackPanel>
-                <Label>Total</Label>
-                <TextBlock Text="{Binding Cash.TotalCash}"></TextBlock>
-                <Button Content="SetPrice" Command="{Binding Cash.CreateCashItem}"/>
-            </StackPanel>
-        </Grid>
-    </Grid>-->
+    
     <Grid>
         <Grid x:Name="grid">
-            <StackPanel>
+            <StackPanel x:Name="stackPanel">
                 <Button Content="Create Category">
                     <Button.Triggers>
                         <EventTrigger RoutedEvent="Button.Click">
@@ -209,12 +82,17 @@
                     </Button.Triggers>
                 </Button>
 
-                <ListBox ItemsSource="{Binding Category.Categories}">
+                <ListBox ItemsSource="{Binding Category.Categories}" SelectedItem="{Binding Cash.CurentCategory}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <EventSetter Event="MouseLeftButtonUp" Handler="ListBoxItem_MouseLeftButtonUp"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -223,6 +101,19 @@
                                 </Border>
                                 <TextBlock Text="{Binding Name}"></TextBlock>
                             </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <ListBox ItemsSource="{Binding History.Histories}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Category.Image}" Width="25"></Image>
+                                    <TextBlock Text="{Binding Cash.Price}"/>
+                                </StackPanel>
+                            </Border>
                            
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -245,7 +136,7 @@
                 <TextBox Text="{Binding Category.PriceCategory,Mode=TwoWay}"></TextBox>
                 <Label>isCosts</Label>
                 <CheckBox IsChecked="{Binding Category.IsCostsCategory, Mode=TwoWay}"></CheckBox>
-                
+
                 <ListBox ItemsSource="{Binding Category.Colors}" SelectedItem="{Binding Category.ColorCategory}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -275,10 +166,41 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-       
-                
+
+
                 <Button Command="{Binding Category.CreateNewCategory}">add</Button>
             </StackPanel>
+        </Grid>
+        <Grid x:Name="gridCashCreate" Background="LightBlue" Width="0" HorizontalAlignment="Right" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Button Height="20" VerticalAlignment="Top" Content="Close">
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard Storyboard="{StaticResource CloseCreateCash}" />
+                    </EventTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <StackPanel Grid.Row="1">
+                <StackPanel>
+                    <Label>category</Label>
+                    <TextBlock Text="{Binding Cash.CurentCategory.Name}"/>
+                    <Label>price</Label>
+                    <TextBox Text="{Binding  Cash.CurentCategory.Price}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="+" Command="{Binding Cash.CountUpCash}"/>
+                        <Button Content="-" Command="{Binding Cash.CountDownCash}"/>
+                    </StackPanel>
+                    <Label >Total Cash</Label>
+                    <TextBlock Text="{Binding Cash.TotalCash}"></TextBlock>
+                    <Button Content="create" Command="{Binding Cash.CreateCashItem}"/>
+                </StackPanel>
+            </StackPanel>
+            
         </Grid>
     </Grid>
 </Window>

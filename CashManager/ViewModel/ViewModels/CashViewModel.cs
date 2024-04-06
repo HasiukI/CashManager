@@ -3,6 +3,7 @@ using CashManager.Repository;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,12 @@ namespace CashManager.ViewModel
         private readonly DapperRepository _repository = null;
 
 
+
         public ICommand CreateCashItem { get; private set; }
-        public ICommand CountUpCash {  get; private set; } 
-        public ICommand CountDownCash {  get; private set; } 
+        public ICommand CountUpCash { get; private set; }
+        public ICommand CountDownCash { get; private set; }
+
+
 
         public CashViewModel(string connectionString)
         {
@@ -29,7 +33,29 @@ namespace CashManager.ViewModel
             CountDownCash = new Command(CountDown);
 
             CountCash = 1;
+
         }
+
+        public decimal TotalCash { get; private set; }
+        public int CountCash { get; private set; }
+
+        private Category _curentCategory;
+        public Category CurentCategory
+        {
+            get => _curentCategory;
+            set
+            {
+                _curentCategory = value;
+                TotalCash = _curentCategory.Price;
+                onPropertyChanged(nameof(TotalCash));
+                onPropertyChanged(nameof(CurentCategory));
+            }
+        }
+
+
+        
+
+
 
         private void CountUp()
         {
@@ -52,28 +78,8 @@ namespace CashManager.ViewModel
 
         private async Task CreateCash()
         {
-            Cash cash = new Cash() { Price = (int)TotalCash, CategoryId=_curentCategory.Id, Count=CountCash, CreatedAt=DateTime.UtcNow};
+            Cash cash = new Cash() { Price = TotalCash, CategoryId = _curentCategory.Id, CreatedAt = DateTime.UtcNow };
             await _repository.CreateCash(cash);
         }
-
-
-
-        public int CountCash { get; private set; }
-
-        private Category _curentCategory;
-        public Category CurentCategory
-        {
-            get => _curentCategory;
-            set
-            {
-                _curentCategory = value;
-                TotalCash = _curentCategory.Price;
-                onPropertyChanged(nameof(TotalCash));
-                onPropertyChanged(nameof(CurentCategory));
-            }
-        }
-
-
-       public decimal TotalCash { get; private set; }
     }
 }

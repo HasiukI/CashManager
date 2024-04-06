@@ -38,9 +38,9 @@ namespace CashManager.ViewModel
 
             CreateNewCategory = new AsyncCommand(CreateCategory);
 
-            Colors.Add("Blue");
-            Colors.Add("Pink");
-            Colors.Add("Green");
+            Colors.Add("#39878c");
+            Colors.Add("#fe4505");
+            Colors.Add("#ffc117");
 
           
                         
@@ -84,7 +84,7 @@ namespace CashManager.ViewModel
                 return false;
             }
 
-            Category category = new Category() { isCosts = IsCostsCategory, Name = _nameCategory, Price = _priceCategory, Color = _colorCategory };
+            Category category = new Category() { isCosts = IsCostsCategory, Name = _nameCategory, Price = _priceCategory, Color = _colorCategory, IsActual=true };
 
             if (_colorCategory == null)
             {
@@ -106,6 +106,7 @@ namespace CashManager.ViewModel
            
             category.Id = await _repository.CreateCategoryAsync(category);
 
+            
             Categories.Add(category);
 
             return true;
