@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CashManager.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="450" Width="530"
         >
-    <Window.Resources>
+    <!--<Window.Resources>
         <Storyboard x:Key="ShowCreateCategory">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(UIElement.Visibility)">
                 <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
@@ -76,66 +76,507 @@
                 <EasingColorKeyFrame KeyTime="00:00:00.4000000" Value="#FFA7D5AA"/>
             </ColorAnimationUsingKeyFrames>
         </Storyboard>
-    </Window.Resources>
+        <Storyboard x:Key="ShowCalendar">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="500"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseCalendar">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="500"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowHistory">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="400"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseHistory">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="400"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>-->
 
     <Window.DataContext>
-        <local:MainViewModel/>
+        <local:PagesViewModel/>
     </Window.DataContext>
 
-    
-    <Grid>
-        <Grid x:Name="grid">
+
+    <!--<Grid>
+        <Grid   x:Name="grid" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>-->
+
+    <!--<Grid Grid.Row="0" Background="#FF3A9BFA">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Your Sum:" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" FontSize="24" FontWeight="Bold"/>
+                    <TextBlock Text="00.00$" FontWeight="Bold" FontSize="24" Foreground="White" Margin="5,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Create Category">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard Storyboard="{StaticResource ShowCreateCategory}" />
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                -->
+    <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition  Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Background="#FF3A9BFA">
+                    <Button Content="Calendar">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard Storyboard="{StaticResource ShowCalendar}" />
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button Content="ShowHistory">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard Storyboard="{StaticResource ShowHistory}" />
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackPanel>-->
+    <!--<Grid  x:Name="gridCalendar" Background="White"  HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.ColumnSpan="7" Background="#FF2EA9FC">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" HorizontalAlignment="Left" Content="Past" Command="{Binding PastMounth}"/>
+                        <TextBlock Grid.Column="1" Text="28.03" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+                        <Button Grid.Column="2" HorizontalAlignment="Right" Command="{Binding NextMounth}">Next</Button>
+                    </Grid>
+
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Пн" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Вт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="Ср" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="3" Text="Чт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="4" Text="Пт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="5" Text="Сб" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                    <TextBlock Grid.Row="1" Grid.Column="6" Text="Нд" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
+                    <ListBox Grid.Row="2" Grid.ColumnSpan="7" ItemsSource="{Binding TotalSumDays}" SelectedItem="{Binding SelectedDate}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="7" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Text="{Binding CurentDate.Day}" FontSize="12" FontWeight="Heavy"/>
+
+                                    <StackPanel Grid.Row="1"  Orientation="Horizontal">
+                                        <TextBlock Text="+" FontSize="10" Foreground="#FF15C30C"/>
+                                        <TextBlock Grid.Row="1" Text="{Binding TotalProfit, StringFormat=N2}" FontSize="10" Foreground="#FF15C30C"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2"  Orientation="Horizontal">
+                                        <TextBlock Text="-" FontSize="10" Foreground="#FFD21818"/>
+                                        <TextBlock Text="{Binding TotalCosts, StringFormat=N2}" FontSize="10" Foreground="#FFD21818"/>
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <StackPanel Grid.Column="7" Background="#FF2EA9FC" Grid.RowSpan="3">
+                        <Button Content="Exit">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.Click">
+                                    <BeginStoryboard Storyboard="{StaticResource CloseCalendar}" />
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </StackPanel>
+                </Grid>-->
+    <!--
+
+                <Grid Grid.Column="1">
+
+                    -->
+    <!--Calendar-->
+    <!--<Grid  x:Name="gridCalendar" Background="White" Visibility="Hidden" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.ColumnSpan="7" Background="#FF2EA9FC">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" HorizontalAlignment="Left" Content="Past" Command="{Binding PastMounth}"/>
+                            <TextBlock Grid.Column="1" Text="28.03" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+                            <Button Grid.Column="2" HorizontalAlignment="Right" Command="{Binding NextMounth}">Next</Button>
+                        </Grid>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Пн" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Вт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="Ср" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="Чт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="4" Text="Пт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="5" Text="Сб" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="6" Text="Нд" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
+                        <ListBox Grid.Row="2" Grid.ColumnSpan="7" ItemsSource="{Binding TotalSumDays}" SelectedItem="{Binding SelectedDate}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="7" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                
+                                        <TextBlock Grid.Row="0" Text="{Binding CurentDate.Day}" FontSize="12" FontWeight="Heavy"/>
+                                        
+                                        <StackPanel Grid.Row="1"  Orientation="Horizontal">
+                                            <TextBlock Text="+" FontSize="10" Foreground="#FF15C30C"/>
+                                            <TextBlock Grid.Row="1" Text="{Binding TotalProfit, StringFormat=N2}" FontSize="10" Foreground="#FF15C30C"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2"  Orientation="Horizontal">
+                                            <TextBlock Text="-" FontSize="10" Foreground="#FFD21818"/>
+                                            <TextBlock Text="{Binding TotalCosts, StringFormat=N2}" FontSize="10" Foreground="#FFD21818"/>
+                                        </StackPanel>
+                                        
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Grid.Column="7" Background="#FF2EA9FC" Grid.RowSpan="3">
+                            <Button Content="Exit">
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard Storyboard="{StaticResource CloseCalendar}" />
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </Grid>-->
+
+    <!--History-->
+    <!--
+                    <Grid  x:Name="gridHistory" Background="White" Visibility="Hidden" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Background="#FF7B26FF">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="History" FontSize="18" Foreground="White"/>
+
+                            <Button Grid.Column="1" Content="CLose" HorizontalAlignment="Right">
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard Storyboard="{StaticResource CloseHistory}" />
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Background="BlueViolet">
+                            <TextBlock>]a[s;da[sd;</TextBlock>
+                        </Grid>
+                        <ListBox Grid.Row="2" ItemsSource="{Binding Histories}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="10" CornerRadius="10" Background="{Binding Category.Color}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Image Grid.Column="0" Source="{Binding Category.Image}" Width="25"></Image>
+                                            <TextBlock Grid.Column="1" Text="{Binding Cash.Price}"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Cash.CreatedAt}"/>
+                                            <Button Grid.Column="3">Change</Button>
+                                        </Grid>
+                                    </Border>
+
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid  x:Name="gridCalendar" Background="White"  HorizontalAlignment="Left" VerticalAlignment="Top" Grid.RowSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.1*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.ColumnSpan="7" Background="#FF2EA9FC">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" HorizontalAlignment="Left" Content="Past" Command="{Binding PastMounth}"/>
+                            <TextBlock Grid.Column="1" Text="28.03" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="24"/>
+                            <Button Grid.Column="2" HorizontalAlignment="Right" Command="{Binding NextMounth}">Next</Button>
+                        </Grid>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Пн" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Вт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="Ср" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="3" Text="Чт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="4" Text="Пт" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="5" Text="Сб" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Row="1" Grid.Column="6" Text="Нд" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
+                        <ListBox Grid.Row="2" Grid.ColumnSpan="7" ItemsSource="{Binding TotalSumDays}" SelectedItem="{Binding SelectedDate}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="7" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0" Text="{Binding CurentDate.Day}" FontSize="12" FontWeight="Heavy"/>
+
+                                        <StackPanel Grid.Row="1"  Orientation="Horizontal">
+                                            <TextBlock Text="+" FontSize="10" Foreground="#FF15C30C"/>
+                                            <TextBlock Grid.Row="1" Text="{Binding TotalProfit, StringFormat=N2}" FontSize="10" Foreground="#FF15C30C"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2"  Orientation="Horizontal">
+                                            <TextBlock Text="-" FontSize="10" Foreground="#FFD21818"/>
+                                            <TextBlock Text="{Binding TotalCosts, StringFormat=N2}" FontSize="10" Foreground="#FFD21818"/>
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        -->
+    <!--<StackPanel Grid.Column="7" Background="#FF2EA9FC" Grid.RowSpan="3">
+                            <Button Content="Exit">
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard Storyboard="{StaticResource CloseCalendar}" />
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackPanel>-->
+    <!--
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Background="#FF32C62A">
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="White" Margin="10,0,0,0">Profit</TextBlock>
+                            </Grid>
+
+                            <ListBox Grid.Row="1" ItemsSource="{Binding CategoriesProfit}" SelectedItem="{Binding CurentCategory}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="3"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <EventSetter Event="MouseLeftButtonUp" Handler="ListBoxItem_MouseLeftButtonUp"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Border Width="50" Height="50" Background="{Binding Color}" CornerRadius="50">
+                                                <Image Source="{Binding Image}" Width="40"></Image>
+                                            </Border>
+                                            <TextBlock Text="{Binding Name}"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Background="#FFEA3939">
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="White" Margin="10,0,0,0">Costs</TextBlock>
+                            </Grid>
+
+                            <ListBox Grid.Row="1" ItemsSource="{Binding CategoriesCosts}" SelectedItem="{Binding CurentCategory}">
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="3"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <EventSetter Event="MouseLeftButtonUp" Handler="ListBoxItem_MouseLeftButtonUp"/>
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+                                            <Border Width="50" Height="50" Background="{Binding Color}" CornerRadius="50">
+                                                <Image Source="{Binding Image}" Width="40"></Image>
+                                            </Border>
+                                            <TextBlock Text="{Binding Name}"></TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+        -->
+    <!--<Grid>
             <StackPanel x:Name="stackPanel">
               
-                <Button Content="Create Category">
-                    <Button.Triggers>
-                        <EventTrigger RoutedEvent="Button.Click">
-                            <BeginStoryboard Storyboard="{StaticResource ShowCreateCategory}" />
-                        </EventTrigger>
-                    </Button.Triggers>
-                </Button>
+              
 
-                <ListBox ItemsSource="{Binding Categories}" SelectedItem="{Binding CurentCategory}">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="3"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
-                            <EventSetter Event="MouseLeftButtonUp" Handler="ListBoxItem_MouseLeftButtonUp"/>
-                        </Style>
-                    </ListBox.ItemContainerStyle>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <Border Width="50" Height="50" Background="{Binding Color}" CornerRadius="50">
-                                    <Image Source="{Binding Image}" Width="40"></Image>
-                                </Border>
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
-                <ListBox ItemsSource="{Binding Histories}">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="10"/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border>
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="{Binding Category.Image}" Width="25"></Image>
-                                    <TextBlock Text="{Binding Cash.Price}"/>
-                                </StackPanel>
-                            </Border>
-                           
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                
 
                 <ListBox ItemsSource="{Binding TotalSumDays}" SelectedItem="{Binding SelectedDate}">
                     <ListBox.ItemsPanel>
@@ -163,9 +604,11 @@
                     <TextBlock Text="{Binding SelectedtDateTime.Date}"></TextBlock>
                 </StackPanel>
             </StackPanel>
-        </Grid>
+        </Grid>-->
 
-        <!--Create Category-->
+
+    <!--Create Category-->
+    <!--
         <Grid x:Name="gridCreateCategory" Background="White" Width="0" HorizontalAlignment="Right" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.10*"/>
@@ -230,7 +673,7 @@
                         </Button.Triggers>
                     </Button>
                 </Grid>
-                
+
                 <ListBox ItemsSource="{Binding Colors}" SelectedItem="{Binding ColorCategory}">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -269,14 +712,14 @@
                     </Button.Triggers>
                 </Button>
             </StackPanel>
-           
+
         </Grid>
         <Grid x:Name="gridCashCreate" Background="LightBlue" Width="0" HorizontalAlignment="Right" Visibility="Hidden">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <Button Height="20" VerticalAlignment="Top" Content="Close">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -301,7 +744,331 @@
                     <Button Content="Delete Category"/>
                 </StackPanel>
             </StackPanel>
-            
+
+        </Grid>-->
+    <!--</Grid>-->
+
+    <Window.Resources>
+        <Storyboard x:Key="ShowCalendar">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(FrameworkElement.Height)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="280"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowHistoryDay">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid1" Storyboard.TargetProperty="(FrameworkElement.Height)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="280"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="ShowCreateCategory">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseCreateCategory">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.4000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid2" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="200"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+
+    <Grid>
+        <!--Main-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition/>
+                <RowDefinition Height="0.35*"/>
+            </Grid.RowDefinitions>
+
+            <!--Header-->
+            <StackPanel Background="#FFC81A1A" Orientation="Horizontal">
+                <Button HorizontalAlignment="Left" Content="Calendar">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ShowCalendar}"/>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button HorizontalAlignment="Left" Content="History">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource ShowHistoryDay}"/>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackPanel>
+
+            <!--MainForm-->
+            <Grid Grid.Row="1">
+
+                <!--Calendar-->
+                <Grid x:Name="grid" Height="0" Width="312" Visibility="Hidden" VerticalAlignment="Top"  HorizontalAlignment="Left" Background="White" Panel.ZIndex="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Пн" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Вт" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Ср" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="Чт" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="Пт" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Grid.Column="5" Text="Сб" VerticalAlignment="Bottom"/>
+                    <TextBlock Grid.Row="0" Grid.Column="6" Text="Нд" VerticalAlignment="Bottom"/>
+
+                    <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="5"></ListBox>
+                </Grid>
+
+                <!--History-->
+                <Grid x:Name="grid1" Width="218" HorizontalAlignment="Right" Height="0" VerticalAlignment="Top" Panel.ZIndex="2">
+                    <ListBox Background="#FF46D147">
+                        <ListBoxItem>
+                            <Viewbox>
+                                <Border CornerRadius="10" Background="#FF5C97ED" Width="200" Height="35">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0" Text="350" VerticalAlignment="Center"/>
+                                        <Ellipse Grid.Column="1" Width="30" Height="30" Fill="#FF8007BC"  />
+                                    </Grid>
+                                </Border>
+                            </Viewbox>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Border CornerRadius="10" Background="#FF5C97ED" Width="200" Height="35">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" Text="350"  VerticalAlignment="Center"/>
+                                    <Ellipse Grid.Column="1" Width="30" Height="30" Fill="#FF8007BC"  />
+                                </Grid>
+                            </Border>
+                        </ListBoxItem>
+                    </ListBox>
+                </Grid>
+
+                <!--Diagram-->
+                <Grid>
+
+                    <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="80" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="120" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="160" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="20" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="250" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="35" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="100" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="80" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="50" Margin="5"/>
+                        <Rectangle Width="30" Fill="#FFC41515" VerticalAlignment="Center" Height="80" Margin="5"/>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
+
+            <!--CategoryBlock-->
+            <Grid Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Background="#FF34AC25">
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="Grid.MouseEnter">
+
+                        </EventTrigger>
+                    </Grid.Triggers>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Text="Profit" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFEFEF" Margin="5,0,0,0"/>
+
+                    <Border Grid.Column="1" HorizontalAlignment="Right" Margin="2" Padding="1" CornerRadius="3,3,3,3" BorderBrush="White" BorderThickness="1" Cursor="Hand">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Border.MouseLeftButtonUp">
+                                <BeginStoryboard Storyboard="{StaticResource ShowCreateCategory}"/>
+                            </EventTrigger>
+                        </Border.Triggers>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Create category" Foreground="White"/>
+                    </Border>
+
+
+                </Grid>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse Height="30" Width="30" Fill="#FF1A37CE"></Ellipse>
+                        <TextBlock>Category</TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse Height="30" Width="30" Fill="#FF1A37CE"></Ellipse>
+                        <TextBlock>Category</TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse Height="30" Width="30" Fill="#FF1A37CE"></Ellipse>
+                        <TextBlock>Category</TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse Height="30" Width="30" Fill="#FF1A37CE"></Ellipse>
+                        <TextBlock>Category</TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse Height="30" Width="30" Fill="#FF1A37CE"></Ellipse>
+                        <TextBlock>Category</TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Ellipse Height="30" Width="30" Fill="#FF1A37CE"></Ellipse>
+                        <TextBlock>Category</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
+        <!--CreateCategory-->
+        <Grid x:Name="grid2" HorizontalAlignment="Right" Width="0" Visibility="Hidden" Background="white">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.10*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Background="#FF45AFB9">
+                <Button HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Storyboard="{StaticResource CloseCreateCategory}" />
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <Image Source="/Exit.png" Width="30" />
+                </Button>
+            </Border>
+
+            <StackPanel x:Name="stackPanel1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" FontSize="16" HorizontalAlignment="Right">Category Name:</Label>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBox Text="{Binding NameCategory, Mode=TwoWay}" FontSize="16" BorderBrush="{x:Null}"/>
+                        <Line X1="0" Y1="0" X2="250" Y2="0" Stroke="Black" StrokeThickness="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" FontSize="16" HorizontalAlignment="Right">Price:</Label>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBox Text="{Binding PriceCategory,Mode=TwoWay}" FontSize="16" BorderBrush="{x:Null}"/>
+                        <Line X1="0" Y1="0" X2="250" Y2="0" Stroke="Black" StrokeThickness="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+                <!--<Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Command="{Binding TapCosts}" Grid.Column="0" Content="Costs" Height="60" Width="120" BorderBrush="#FFC67D7D"  Foreground="White" HorizontalAlignment="Center" FontFamily="Arial Black" FontWeight="Bold" FontSize="20" Background="#FFC31B1B">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard Storyboard="{StaticResource TapCostsCreateCategory}" />
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                    <Button  Command="{Binding TapProfit}" Grid.Column="1" HorizontalAlignment="Center"  Height="60" Width="120" Background="#FF0EC44D" BorderBrush="#FFC67D7D" Foreground="White" Content="Profit" FontWeight="Bold" FontFamily="Arial Black" FontSize="20">
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.Click">
+                                <BeginStoryboard Storyboard="{StaticResource TapProfitCreateCategory}" />
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Grid>-->
+
+                <!--<ListBox ItemsSource="{Binding Colors}" SelectedItem="{Binding ColorCategory}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="8" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="3" BorderThickness="1" BorderBrush="Gray" CornerRadius="50" Width="25" Height="25">
+                                <Ellipse Fill="{Binding}"/>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>-->
+
+
+                <ScrollViewer>
+                    <!--<ListBox ItemsSource="{Binding Images}"  SelectedItem="{Binding ImageCategory}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="4"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding}" Width="40" HorizontalAlignment="Center"></Image>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>-->
+                </ScrollViewer>
+                <Button  Content="Create Category" Background="#FF45AFB9" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="25" FontFamily="Arial Black" Foreground="White" >
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackPanel>
         </Grid>
     </Grid>
+
 </Window>

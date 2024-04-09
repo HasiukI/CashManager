@@ -18,9 +18,12 @@ namespace CashManager.ViewModel
     {
         private readonly DapperRepository _repository = null;
 
+        private List<Category> _categories = null;
 
         // 
-        public ObservableCollection<Category> Categories { get; }
+        
+        public ObservableCollection<Category> CategoriesProfit { get; }
+        public ObservableCollection<Category> CategoriesCosts { get; }
         public ObservableCollection<History> Histories { get; private set; }
         public ObservableCollection<TotalSumDay> TotalSumDays { get; private set; }
         public List<string> Colors { get; }
@@ -46,15 +49,19 @@ namespace CashManager.ViewModel
             string connectionString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
             _repository = new DapperRepository(connectionString);
 
-            Categories = new ObservableCollection<Category>(_repository.LoadCategories());
+            _categories = _repository.LoadCategories().ToList();
+
+
+            CategoriesProfit = new ObservableCollection<Category>(_categories.Where(c=> c.IsActual && !c.isCosts));
+            CategoriesCosts = new ObservableCollection<Category>(_categories.Where(c=> c.IsActual && c.isCosts));
             Histories = new ObservableCollection<History>(_repository.LoadHistory(SelectedMounthDate));
             TotalSumDays = new ObservableCollection<TotalSumDay>(LoadCalendar(SelectedMounthDate));
             Colors = new List<string>();
             Images = _repository.ReadAllStaticPictures();
 
-            SelectedDate = TotalSumDays.Where(t => t != null && t.CurentDate == DateTime.Now).FirstOrDefault();
+            _selectedDate= new TotalSumDay() { CurentDate =DateTime.Now };
 
-            CreateNewCategory = new AsyncCommand(CreateCategory);
+             CreateNewCategory = new AsyncCommand(CreateCategory);
             CreateCashItem = new AsyncCommand(CreateCash);
             CountUpCash = new Command(CountUp);
             CountDownCash = new Command(CountDown);
@@ -178,8 +185,14 @@ namespace CashManager.ViewModel
 
             category.Id = await _repository.CreateCategoryAsync(category);
 
-
-            Categories.Add(category);
+            if(category.isCosts) {
+                CategoriesCosts.Add(category);
+            }
+            else
+            {
+                CategoriesProfit.Add(category);
+            }
+           
 
             return true;
         }
@@ -232,7 +245,15 @@ namespace CashManager.ViewModel
         public async Task DeleteCategory()
         {
             await _repository.DeleteCategoryAsync(_curentCategory);
-            Categories.Remove(_curentCategory);
+
+            if (_curentCategory.isCosts)
+            {
+                CategoriesCosts.Add(_curentCategory);
+            }
+            else
+            {
+                CategoriesProfit.Add(_curentCategory);
+            }
         }
 
 
@@ -262,7 +283,16 @@ namespace CashManager.ViewModel
         /// <returns></returns>
         private async Task CreateCash()
         {
+            if(_selectedDate.CurentDate > DateTime.Now)
+            {
+                return;
+            }
+
             Cash cash = new Cash() { Price = TotalCash, CategoryId = _curentCategory.Id, CreatedAt = _selectedDate.CurentDate };
+           
+
+            var hist =  Histories.Where(h =>   h.Cash.CreatedAt < _selectedDate.CurentDate).FirstOrDefault();
+
             await _repository.CreateCashAsync(cash);
 
             Histories.Add(new History() { Cash = cash, Category=_curentCategory });
