@@ -1,11 +1,14 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using CashManager.Repository;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+
 
 namespace CashManager.ViewModel
 {
@@ -14,29 +17,61 @@ namespace CashManager.ViewModel
         private readonly string[] _colorsAtributteCategories={ "#FF34AC25", "#FFC81A1A" };
         private readonly string[] _namesAtributteCategories={"Profit","Costs"};
 
+        private readonly IRepository _repository = null;
 
         public CategoryViewModel() { 
             NameAttributeMenu = _namesAtributteCategories[0];
             ColorAttributeMenu = _colorsAtributteCategories[0];
+
+            ColorsForCategory = new List<string>();
+            ColorsForCategory.Add("#39878c");
+            ColorsForCategory.Add("#fe4505");
+            ColorsForCategory.Add("#ffc117");
+            ColorsForCategory.Add("#ffc117");
+            ColorsForCategory.Add("#ffc117");
+            ColorsForCategory.Add("#ffc117");
+            ColorsForCategory.Add("#ffc117");
+            ColorsForCategory.Add("#ffc117");
+
+            _repository = new FileRepository();
+            ImagesForCategory = _repository.ReadAllStaticPictures();
         }
 
 
 
+        //static File
+        public List<string> ColorsForCategory { get; }
+        public List<BitmapImage> ImagesForCategory { get; }
 
         //Property Model
-        private string _nameCategory;
-        public string NameCategory { get => _nameCategory; set => _nameCategory = value; }
+        private string _nameNewCategory;
+        public string NameNewCategory { get => _nameNewCategory;
+            set { 
+                if(Regex.IsMatch(value, @"[№;%*?:?;!]"))
+                {
+                    ExeptionNameCategory = "Не можна використовувати спеціальні символи";
+                    onPropertyChanged(nameof(ExeptionNameCategory));
+                }
+                if (value.Length > 20)
+                {
+                    ExeptionNameCategory = "Задовга назва";
+                    onPropertyChanged(nameof(ExeptionNameCategory));
+                }
+            }
+        }
+        public string ExeptionNameCategory { get; private set; }
 
-        private int _priceCategory;
-        public int PriceCategory { get => _priceCategory; set => _priceCategory = value; }
+        private int _priceNewCategory;
+        public int PriceNewCategory { get => _priceNewCategory; set => _priceNewCategory = value; }
+        public string ExaptionPriceCategory { get; private set; }
 
         private bool _isCosts;
 
-        private string _colorCategory;
-        public string ColorCategory { get => _colorCategory; set => _colorCategory = value; }
+        private string _colorNewCategory;
+        public string ColorNewCategory { get => _colorNewCategory; set => _colorNewCategory = value; }
 
-        private BitmapImage _imageCategory;
-        public BitmapImage ImageCategory { get => _imageCategory; set => _imageCategory = value; }
+        private BitmapImage _imageNewCategory;
+        public BitmapImage ImageNewCategory { get => _imageNewCategory; set => _imageNewCategory = value; }
 
 
         //Design

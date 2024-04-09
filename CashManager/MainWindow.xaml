@@ -821,12 +821,12 @@
                         </i:Interaction.Triggers>
                     </TextBlock>
 
-                    <Border Grid.Column="1" HorizontalAlignment="Right" Margin="2" Padding="1" CornerRadius="3,3,3,3" BorderBrush="White" BorderThickness="1" Cursor="Hand">
-                        <Border.Triggers>
+                    <Border Grid.Column="1" HorizontalAlignment="Right" Margin="2" Padding="1" CornerRadius="3,3,3,3" BorderBrush="White" BorderThickness="1" Cursor="Hand" MouseLeftButtonUp="Tap_ShowCreaeteCategory">
+                        <!--<Border.Triggers>
                             <EventTrigger RoutedEvent="Border.MouseLeftButtonUp">
                                 <BeginStoryboard Storyboard="{StaticResource ShowCreateCategory}"/>
                             </EventTrigger>
-                        </Border.Triggers>
+                        </Border.Triggers>-->
                         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Create category" Foreground="White"/>
                     </Border>
 
@@ -864,13 +864,19 @@
         </Grid>
 
         <!--CreateCategory-->
-        <Grid x:Name="grid2" HorizontalAlignment="Right" Width="0" Visibility="Hidden" Background="white">
+        <Grid x:Name="grid2" HorizontalAlignment="Right" Width="200" Visibility="Visible" Background="white">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.10*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Border Background="#FF45AFB9">
+            <Grid  Background="#FF45AFB9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+              
                 <Button HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Button.Triggers>
                         <EventTrigger RoutedEvent="Button.Click">
@@ -879,85 +885,109 @@
                     </Button.Triggers>
                     <Image Source="/Exit.png" Width="30" />
                 </Button>
-            </Border>
 
-            <StackPanel x:Name="stackPanel1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <TextBlock Grid.Column="1" Foreground="White" Text="{Binding Category.NameAttributeMenu}" VerticalAlignment="Center" FontWeight="Bold" FontSize="16"/>
+            </Grid>
+            
+
+            <StackPanel x:Name="stackPanel1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Background="{Binding Category.ColorAttributeMenu}">
+
+                <Label Foreground="Red" FontSize="8" Content="{Binding Category.ExeptionNameCategory}" />
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.3*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" FontSize="16" HorizontalAlignment="Right">Category Name:</Label>
+                    <Label Grid.Column="0" FontSize="12" HorizontalAlignment="Right">Name:</Label>
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBox Text="{Binding NameCategory, Mode=TwoWay}" FontSize="16" BorderBrush="{x:Null}"/>
-                        <Line X1="0" Y1="0" X2="250" Y2="0" Stroke="Black" StrokeThickness="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                        <TextBox Text="{Binding Category.NameNewCategory, Mode=TwoWay}" FontSize="12" BorderBrush="{x:Null}"/>
+                        <Line X1="0" Y1="0" X2="120" Y2="0" Stroke="Black" StrokeThickness="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
                     </StackPanel>
                 </Grid>
+                <Label Foreground="Red" Content="{Binding Category.ExaptionPriceCategory}" FontSize="8"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.3*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Column="0" FontSize="16" HorizontalAlignment="Right">Price:</Label>
+                    <Label Grid.Column="0" FontSize="12" HorizontalAlignment="Right">Price:</Label>
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBox Text="{Binding PriceCategory,Mode=TwoWay}" FontSize="16" BorderBrush="{x:Null}"/>
-                        <Line X1="0" Y1="0" X2="250" Y2="0" Stroke="Black" StrokeThickness="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
+                        <TextBox Text="{Binding Category.PriceNewCategory,Mode=TwoWay}" FontSize="12" BorderBrush="{x:Null}"/>
+                        <Line X1="0" Y1="0" X2="120" Y2="0" Stroke="Black" StrokeThickness="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" />
                     </StackPanel>
                 </Grid>
-                <!--<Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
 
-                    <Button Command="{Binding TapCosts}" Grid.Column="0" Content="Costs" Height="60" Width="120" BorderBrush="#FFC67D7D"  Foreground="White" HorizontalAlignment="Center" FontFamily="Arial Black" FontWeight="Bold" FontSize="20" Background="#FFC31B1B">
-                        <Button.Triggers>
-                            <EventTrigger RoutedEvent="Button.Click">
-                                <BeginStoryboard Storyboard="{StaticResource TapCostsCreateCategory}" />
-                            </EventTrigger>
-                        </Button.Triggers>
-                    </Button>
-                    <Button  Command="{Binding TapProfit}" Grid.Column="1" HorizontalAlignment="Center"  Height="60" Width="120" Background="#FF0EC44D" BorderBrush="#FFC67D7D" Foreground="White" Content="Profit" FontWeight="Bold" FontFamily="Arial Black" FontSize="20">
-                        <Button.Triggers>
-                            <EventTrigger RoutedEvent="Button.Click">
-                                <BeginStoryboard Storyboard="{StaticResource TapProfitCreateCategory}" />
-                            </EventTrigger>
-                        </Button.Triggers>
-                    </Button>
-                </Grid>-->
-
-                <!--<ListBox ItemsSource="{Binding Colors}" SelectedItem="{Binding ColorCategory}">
+                <TextBlock Text="Colors:" FontSize="12"  Margin="15 0 0 0"/>
+                
+                <ListBox ItemsSource="{Binding Category.ColorsForCategory}" SelectedItem="{Binding Category.ColorNewCategory}">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </ListBox.Style>
+                    
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}">
+                                            <ContentPresenter />
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="Border" Property="BorderThickness" Value="1" />
+                                                <Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
+                                                <Setter TargetName="Border" Property="CornerRadius" Value="20" />
+                                                <Setter TargetName="Border" Property="Width" Value="20" />
+                                                <Setter TargetName="Border" Property="Height" Value="20" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="8" />
+                            <UniformGrid Columns="5" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="3" Width="20" Height="20">
+                                <Ellipse Fill="{Binding}"  />
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Text="Images:" FontSize="12" Margin="15 0 0 0"/>
+
+                <ListBox ItemsSource="{Binding Category.ImagesForCategory}"  SelectedItem="{Binding Category.ImageNewCategory}">
+                    <ListBox.Style>
+                        <Style TargetType="ListBox">
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Style>
+                    </ListBox.Style>
+                    
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"/>
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border Padding="3" BorderThickness="1" BorderBrush="Gray" CornerRadius="50" Width="25" Height="25">
-                                <Ellipse Fill="{Binding}"/>
-                            </Border>
+                            <Image Source="{Binding}" Width="35" HorizontalAlignment="Center"></Image>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </ListBox>-->
-
-
-                <ScrollViewer>
-                    <!--<ListBox ItemsSource="{Binding Images}"  SelectedItem="{Binding ImageCategory}">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="4"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding}" Width="40" HorizontalAlignment="Center"></Image>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>-->
-                </ScrollViewer>
+                </ListBox>
+                
                 <Button  Content="Create Category" Background="#FF45AFB9" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="25" FontFamily="Arial Black" Foreground="White" >
                     <Button.Triggers>
                         <EventTrigger RoutedEvent="Button.Click">

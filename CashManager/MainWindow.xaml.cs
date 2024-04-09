@@ -20,11 +20,25 @@ namespace CashManager
         public MainWindow()
         {
             InitializeComponent();
+
         }
+
+        private void Tap_ShowCreaeteCategory(object sender, MouseButtonEventArgs e)
+        {
+            var storyboard = FindResource("ShowCreateCash") as Storyboard;
+            if (storyboard != null)
+            {
+                storyboard.
+                Storyboard.SetTarget(storyboard, gridCashCreate);
+                storyboard.Begin();
+            }
+        }
+
+
 
         //private void ListBoxItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         //{
-            
+
         //        // Запуск анімації для gridCashCreate
         //        var storyboard = FindResource("ShowCreateCash") as Storyboard;
         //        if (storyboard != null)
@@ -32,7 +46,7 @@ namespace CashManager
         //            Storyboard.SetTarget(storyboard, gridCashCreate);
         //            storyboard.Begin();
         //        }
-            
+
         //}
     }
 }

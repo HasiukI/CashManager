@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace CashManager.Repository
 {
@@ -18,6 +19,10 @@ namespace CashManager.Repository
         #endregion
         #region History
         public IEnumerable<History> LoadHistory(DateTime date);
+        #endregion
+        #region Other
+        public List<BitmapImage> ReadAllStaticPictures();
+        public string GetRootDirectoryImages();
         #endregion
     }
 }
