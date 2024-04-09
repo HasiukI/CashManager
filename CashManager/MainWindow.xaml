@@ -8,119 +8,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="530"
         >
-    <!--<Window.Resources>
-        <Storyboard x:Key="ShowCreateCategory">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="400"/>
-            </DoubleAnimationUsingKeyFrames>
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.IsEnabled)">
-                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
-                <DiscreteBooleanKeyFrame KeyTime="00:00:01" Value="False"/>
-            </BooleanAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="CloseCreateCategory">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="400"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.IsEnabled)">
-                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="00:00:00.7000000" Value="True"/>
-            </BooleanAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:01" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="CloseCreateCash">
-            <BooleanAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=grid}" Storyboard.TargetProperty="(UIElement.IsEnabled)">
-                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="False"/>
-                <DiscreteBooleanKeyFrame KeyTime="00:00:00.4000000" Value="True"/>
-            </BooleanAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.8000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="ShowCreateCash">
-            <DoubleAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.9000000" Value="297"/>
-            </DoubleAnimationUsingKeyFrames>
-            <ObjectAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=gridCashCreate}" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.9000000" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <BooleanAnimationUsingKeyFrames Storyboard.Target="{Binding ElementName=grid}" Storyboard.TargetProperty="(UIElement.IsEnabled)">
-                <DiscreteBooleanKeyFrame KeyTime="00:00:00" Value="True"/>
-                <DiscreteBooleanKeyFrame KeyTime="00:00:00.1000000" Value="False"/>
-            </BooleanAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="TapCostsCreateCategory">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                <EasingColorKeyFrame KeyTime="00:00:00" Value="White"/>
-                <EasingColorKeyFrame KeyTime="00:00:00.4000000" Value="#FFC38A8A"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="TapProfitCreateCategory">
-            <ColorAnimationUsingKeyFrames Storyboard.TargetName="gridCreateCategory" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
-                <EasingColorKeyFrame KeyTime="00:00:00" Value="White"/>
-                <EasingColorKeyFrame KeyTime="00:00:00.4000000" Value="#FFA7D5AA"/>
-            </ColorAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="ShowCalendar">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="500"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="CloseCalendar">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.7000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridCalendar" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="500"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="ShowHistory">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Visible}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="400"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="CloseHistory">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(UIElement.Visibility)">
-                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
-                <DiscreteObjectKeyFrame KeyTime="00:00:00.6000000" Value="{x:Static Visibility.Hidden}"/>
-            </ObjectAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="gridHistory" Storyboard.TargetProperty="(FrameworkElement.Width)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="400"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </Window.Resources>-->
+    
 
     <Window.DataContext>
-        <local:CategoryViewModel/>
+        <local:MainViewModel/>
     </Window.DataContext>
 
 
@@ -910,7 +801,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Grid Background="{Binding ColorAttributeMenu}">
+                <Grid Background="{Binding Category.ColorAttributeMenu}">
                     <Grid.Triggers>
                         <EventTrigger RoutedEvent="Grid.MouseEnter">
 
@@ -922,10 +813,10 @@
                     </Grid.ColumnDefinitions>
 
 
-                    <TextBlock Text="{Binding NameAttributeMenu}" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFEFEF" Margin="5,0,0,0">
+                    <TextBlock Text="{Binding Category.NameAttributeMenu}" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFEFEF" Margin="5,0,0,0">
                         <i:Interaction.Triggers>
                              <i:EventTrigger EventName="MouseLeftButtonUp">
-                                  <i:InvokeCommandAction Command="{Binding ChangeCategory}" />
+                                  <i:InvokeCommandAction Command="{Binding Category.ChangeCategory}" />
                              </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBlock>
