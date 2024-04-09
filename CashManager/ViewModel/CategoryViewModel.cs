@@ -1,19 +1,24 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace CashManager.ViewModel
 {
     internal class CategoryViewModel : ViewModelBase
     {
-        private readonly string[] _colorsAtributteCategories={"",""};
-        private readonly string[] _namesAtributteCategories={"",""};
+        private readonly string[] _colorsAtributteCategories={ "#FF34AC25", "#FFC81A1A" };
+        private readonly string[] _namesAtributteCategories={"Profit","Costs"};
 
 
-        public CategoryViewModel() { }
+        public CategoryViewModel() { 
+            NameAttributeMenu = _namesAtributteCategories[0];
+            ColorAttributeMenu = _colorsAtributteCategories[0];
+        }
 
 
 
@@ -37,5 +42,25 @@ namespace CashManager.ViewModel
         //Design
         public string ColorAttributeMenu { get; private set; }
         public string NameAttributeMenu { get; private set; }
+
+        public ICommand ChangeCategory
+        {
+            get => new RelayCommand(() =>
+            {
+                if(NameAttributeMenu == _namesAtributteCategories[0])
+                {
+                    NameAttributeMenu = _namesAtributteCategories[1];
+                    ColorAttributeMenu = _colorsAtributteCategories[1];
+                }
+                else
+                {
+                    NameAttributeMenu = _namesAtributteCategories[0];
+                    ColorAttributeMenu = _colorsAtributteCategories[0];
+                }
+
+                onPropertyChanged(nameof(ColorAttributeMenu));
+                onPropertyChanged(nameof(NameAttributeMenu));
+            });
+        }
     }
 }
