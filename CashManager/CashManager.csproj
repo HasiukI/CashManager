@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="BllFile\" />
+    <Folder Include="Files\" />
     <Folder Include="ProgramImages\" />
   </ItemGroup>
 

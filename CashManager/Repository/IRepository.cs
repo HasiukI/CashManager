@@ -13,6 +13,7 @@ namespace CashManager.Repository
         #region Category
         public IEnumerable<Category> LoadCategories();
         public Task DeleteCategoryAsync(Category category);
+        public Task CreateCategoryAsync(Category category);
         #endregion
         #region Cash
         public Task CreateCashAsync(Cash cash);

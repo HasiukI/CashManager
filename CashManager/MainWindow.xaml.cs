@@ -25,13 +25,9 @@ namespace CashManager
 
         private void Tap_ShowCreaeteCategory(object sender, MouseButtonEventArgs e)
         {
-            var storyboard = FindResource("ShowCreateCash") as Storyboard;
-            if (storyboard != null)
-            {
-                storyboard.
-                Storyboard.SetTarget(storyboard, gridCashCreate);
-                storyboard.Begin();
-            }
+            
+            Storyboard storyboard = FindResource("ShowCreateCategory") as Storyboard;
+
         }
 
 

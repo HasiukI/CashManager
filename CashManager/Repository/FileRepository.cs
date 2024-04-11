@@ -1,4 +1,5 @@
 ﻿using CashManager.Model;
+using CashManager.Serialazer;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,15 @@ namespace CashManager.Repository
 {
     class FileRepository : IRepository
     {
+        private readonly FileSerializer serializer = null;
+        private readonly List<BitmapImage> _staticImages = null;
+
+        public FileRepository() { 
+            serializer = new FileSerializer();
+            _staticImages = ReadAllStaticPictures();
+        }
+
+
         public Task CreateCashAsync(Cash cash)
         {
             throw new NotImplementedException();
@@ -23,7 +33,27 @@ namespace CashManager.Repository
 
         public IEnumerable<Category> LoadCategories()
         {
-            throw new NotImplementedException();
+            List<Category> categories = new List<Category>();
+            string path = $"{GetRootDirectoryFiles()}\\Categories.bit";
+
+            using (FileStream fl = new FileStream(path, FileMode.Open, FileAccess.Read))
+            {
+                using (StreamReader sr = new StreamReader(fl, Encoding.Unicode))
+                {
+                    while (sr.Peek() > 0){
+                        string str = sr.ReadLine();
+                        if (str != null && !String.IsNullOrEmpty(str))
+                        {
+                            Category category = serializer.DesialazeFile<Category>(str);
+                            category.Image = _staticImages.Where(i => Path.GetFileName(i.UriSource.ToString()) == category.ImageName).First();
+                            categories.Add(category);
+                        }
+                    }
+                }
+            }
+
+            return categories;
+
         }
 
         public IEnumerable<History> LoadHistory(DateTime date)
@@ -67,6 +97,26 @@ namespace CashManager.Repository
             string dirrr = Directory.GetCurrentDirectory();
             return dirrr.Remove(dirrr.IndexOf("bin")) + "Images";
         }
+        public string GetRootDirectoryFiles()
+        {
+            string dirrr = Directory.GetCurrentDirectory();
+            return dirrr.Remove(dirrr.IndexOf("bin")) + "Files";
+        }
+
+        public async Task CreateCategoryAsync(Category category)
+        {
+            string path = $"{GetRootDirectoryFiles()}/Categories.bit";
+
+            using (FileStream fl = new FileStream(path, FileMode.Append, FileAccess.Write))
+            {
+                using (StreamWriter sr = new StreamWriter(fl, Encoding.Unicode))
+                {
+                    string str = serializer.SerialazerFile<Category>(category);
+                    await sr.WriteLineAsync(str);
+                }
+            }
+        }
         #endregion
+
     }
 }

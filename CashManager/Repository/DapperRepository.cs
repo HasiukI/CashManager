@@ -226,6 +226,11 @@ namespace CashManager.Repository
             string dirrr = Directory.GetCurrentDirectory();
             return dirrr.Remove(dirrr.IndexOf("bin")) + "Images";
         }
+
+        Task IRepository.CreateCategoryAsync(Category category)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
