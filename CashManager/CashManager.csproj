@@ -9,30 +9,62 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="arrow-down.png" />
+    <None Remove="arrow-left.png" />
+    <None Remove="arrow-side.png" />
+    <None Remove="arrow-up.png" />
+    <None Remove="back.jpg" />
+    <None Remove="bar-chart.png" />
+    <None Remove="calendar.png" />
+    <None Remove="categoryCreate.png" />
+    <None Remove="circle.png" />
+    <None Remove="close.png" />
+    <None Remove="delete.png" />
     <None Remove="Exit.png" />
+    <None Remove="file.png" />
+    <None Remove="graph.png" />
+    <None Remove="imageadd.png" />
+    <None Remove="imageno.png" />
+    <None Remove="MyLogo.png" />
+    <None Remove="right-arrow.png" />
+    <None Remove="setting.png" />
+    <None Remove="ukraine.png" />
+    <None Remove="united-kingdom.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.35" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc2" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BllFile\" />
-    <Folder Include="Files\" />
+    <Folder Include="Images\StaticImages\" />
     <Folder Include="ProgramImages\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="arrow-down.png" />
+    <Resource Include="arrow-left.png" />
+    <Resource Include="arrow-side.png" />
+    <Resource Include="arrow-up.png" />
+    <Resource Include="back.jpg" />
+    <Resource Include="bar-chart.png" />
+    <Resource Include="calendar.png" />
+    <Resource Include="categoryCreate.png" />
+    <Resource Include="circle.png" />
+    <Resource Include="close.png" />
+    <Resource Include="delete.png" />
     <Resource Include="Exit.png" />
+    <Resource Include="file.png" />
+    <Resource Include="graph.png" />
+    <Resource Include="imageadd.png" />
+    <Resource Include="imageno.png" />
+    <Resource Include="MyLogo.png" />
+    <Resource Include="right-arrow.png" />
+    <Resource Include="setting.png" />
+    <Resource Include="ukraine.png" />
+    <Resource Include="united-kingdom.png" />
   </ItemGroup>
 
 </Project>

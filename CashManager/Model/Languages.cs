@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CashManager.Model
 {
-    internal class History
+    internal class Languages
     {
-        public Category Category { get; set; }
-        public Cash Cash { get; set; }
-
+        public string Language { get; set; }
+        public Dictionary<string, string> Strings { get; set; }
     }
 }

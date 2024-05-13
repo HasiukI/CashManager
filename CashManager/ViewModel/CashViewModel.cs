@@ -1,0 +1,317 @@
+﻿using CashManager.Model;
+using CashManager.Repository;
+using MvvmHelpers.Commands;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+
+namespace CashManager.ViewModel
+{
+    internal class CashViewModel : ViewModelBase
+    {
+        private readonly Data _data = null;
+        private readonly IRepository _repository;
+        private readonly LanguagesViewModel _language;
+
+        public ICommand CreateCashCommand { get; }
+        public ICommand DeleteCashCommand { get; }
+        public ICommand UpdateCashCommand { get; }
+        public ICommand SetToUpdateCashCommand { get; }
+        public ICommand SetDefaultPropertyCommand { get; }
+        public ICommand UpCountCommand { get; }
+        public ICommand DownCountCommand { get; }
+
+        public CashViewModel(Data data, IRepository repository, LanguagesViewModel language)
+        {
+            _data = data;
+            _repository = repository;
+            _language = language;
+
+            CreateCashCommand = new AsyncCommand(CreateCash);
+            DeleteCashCommand = new AsyncCommand(DeleteCash);
+            SetToUpdateCashCommand = new Command(SetToUpdate);
+            UpdateCashCommand = new AsyncCommand(UpdateCash);
+            SetDefaultPropertyCommand = new Command(SetDefaultProperty);
+            UpCountCommand = new Command(UpCount);
+            DownCountCommand = new Command(DownCount);
+        }
+
+        #region Property
+
+        public string ExeptionCash { get; private set; }
+
+        private AllInfoForCash _selectedHistory;
+        public AllInfoForCash SelectedHistory
+        {
+            get => _selectedHistory;
+            set
+            {
+                if (_selectedHistory != value)
+                {
+                    _selectedHistory = value;
+
+                    if (_selectedHistory != null)
+                    {
+                        this._data.CurentCategory = _selectedHistory.Category;
+                        SetToUpdate();
+                    }
+                         
+                    onPropertyChanged(nameof(SelectedHistory));
+                }
+            }
+        }
+
+        private int _count;
+        public int Count { 
+            get=>_count;
+            set { 
+                if(value != _count)
+                {
+                    _count = value;
+                    onPropertyChanged(nameof(Count));
+                }
+            }
+        }
+
+        private decimal _totalPrice;
+        public decimal TotalPrice
+        {
+            get => _totalPrice;
+            set
+            {
+                if (_totalPrice != value)
+                {
+                    _totalPrice = value;
+                    onPropertyChanged(nameof(TotalPrice));
+                }
+            }
+        }
+
+        private string _cashDescription;
+        public string CashDescription {
+            get => _cashDescription;
+            set
+            {
+                if (value!=_cashDescription)
+                {
+                    _cashDescription = value;
+                    onPropertyChanged($"{nameof(CashDescription)}");
+
+                }
+            }
+        }
+
+        private bool _visibilityDescription;
+        public bool VisibilityDescription { 
+            get=> _visibilityDescription;
+            set { 
+                if( value!= _visibilityDescription)
+                {
+                    _visibilityDescription = value;
+                    onPropertyChanged(nameof(VisibilityDescription));
+                }
+            } 
+        }
+
+        private bool _visibilityCreateCash;
+        public bool VisibilityCreateCash
+        {
+            get => _visibilityCreateCash;
+            set
+            {
+                if (value != _visibilityCreateCash)
+                {
+                    _visibilityCreateCash = value;
+                    onPropertyChanged(nameof(VisibilityCreateCash));
+                }
+            }
+        }
+
+        private bool _visibilityUpdateCash;
+        public bool VisibilityUpdateCash
+        {
+            get => _visibilityUpdateCash;
+            set
+            {
+                if (value != _visibilityUpdateCash)
+                {
+                    _visibilityUpdateCash = value;
+                    onPropertyChanged(nameof(VisibilityUpdateCash));
+                }
+            }
+        }
+
+        private bool _isShowAnimate;
+        public bool IsShowAnimate
+        {
+            get => _isShowAnimate;
+            set
+            {
+                if(value != _isShowAnimate)
+                {
+                    _isShowAnimate = value;
+                    onPropertyChanged(nameof(IsShowAnimate));
+                }
+            }
+        }
+        #endregion
+
+
+        #region Command
+        public void SetDefaultProperty()
+        {
+            CashDescription = String.Empty;
+            Count = 0;
+            TotalPrice = 0;
+            if (this._data.CurentCategory.Price != 0)
+            {
+                Count = 1;
+                TotalPrice = this._data.CurentCategory.Price;
+            }
+
+            VisibilityCreateCash = true;
+            VisibilityUpdateCash = false;
+            IsShowAnimate = false;
+        }
+
+        public void UpCount()
+        {
+                Count++;
+                TotalPrice = Count * this._data.CurentCategory.Price;
+        }
+
+        public void DownCount()
+        {
+                if (Count > 1)
+                {
+                    Count--;
+                    TotalPrice = Count * this._data.CurentCategory.Price;
+                }
+        }
+
+
+        private void SetToUpdate()
+        {
+            TotalPrice = SelectedHistory.Cash.Price;
+            CashDescription = SelectedHistory.Cash.Description;
+
+            if (SelectedHistory.Category.Price != 0)
+            {
+                this.Count = _selectedHistory.Cash.Count;
+            }
+            else
+            {
+                Count = 0;
+            }
+
+            VisibilityCreateCash = false;
+            VisibilityUpdateCash = true;
+            IsShowAnimate = false;
+        }
+
+        private async Task<bool> CreateCash()
+        {
+
+
+            if (!CheckCreatedCash())
+            {
+                return false;
+            }
+           
+
+            Cash cash = new Cash() { 
+                Id=this._data.MainInfo.LastIdCash++, 
+                CategoryId = this._data.CurentCategory.Id, 
+                Price = TotalPrice, 
+                CreatedAt = this._data.SelectedDate,
+                Description= this.CashDescription
+            };
+
+            if (this._data.CurentCategory.Price != 0)
+                cash.Count = Count;
+
+            this._data.UpdateCash(cash, ActionType.Add);
+
+            IsShowAnimate = true;
+            return true;
+        }
+        
+        private async Task DeleteCash()
+        {
+            var rez = MessageBox.Show($"Ви дійсно хочете видалити {SelectedHistory.Cash.Price} з категорії {SelectedHistory.Category.Name}?", "Delete?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (rez == MessageBoxResult.Yes)
+            {
+                this._data.UpdateCash(SelectedHistory.Cash, ActionType.Remove);
+            }
+
+        }
+
+        private async Task UpdateCash()
+        {
+            if (SelectedHistory == null)
+                return;
+
+            if (!CheckCreatedCash())
+            {
+                return ;
+            }
+
+            Cash cash = new Cash()
+            {
+                Id = this.SelectedHistory.Cash.Id,
+                CategoryId = this.SelectedHistory.Cash.CategoryId,
+                Price = this.TotalPrice,
+                CreatedAt = this.SelectedHistory.Cash.CreatedAt,
+                Count = this.Count,
+                Description = this.CashDescription
+
+            };
+
+            this._data.UpdateCash(cash, ActionType.Update);
+            IsShowAnimate = true;
+        }
+
+     
+        private bool CheckCreatedCash()
+        {
+            ExeptionCash = "";
+            onPropertyChanged(nameof(ExeptionCash));
+
+            if (TotalPrice <= 0)
+            {
+                ExeptionCash = _language.ExeptionCreateCashValue;
+                onPropertyChanged(nameof(ExeptionCash));
+                return false;
+            }
+            if (CashDescription == null)
+            {
+                CashDescription = "none";
+            }
+            if(Regex.IsMatch(CashDescription, @"[^a-zA-Z0-9\u0400-\u04FF]"))
+            {
+                ExeptionCash = _language.ExeptionCreateCashDescription;
+                onPropertyChanged(nameof(ExeptionCash));
+                return false;
+            }
+            if(this._data.SelectedDate.Date > DateTime.Now.Date)
+            {
+                ExeptionCash = _language.ExeptionCreateCashDate;
+                onPropertyChanged(nameof(ExeptionCash));
+                return false;
+            }
+
+                return true;
+        }
+        #endregion
+
+
+
+    }
+}

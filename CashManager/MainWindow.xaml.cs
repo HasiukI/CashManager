@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using CashManager.ViewModel;
+using System;
+using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace CashManager
 {
     /// <summary>
@@ -20,29 +24,62 @@ namespace CashManager
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
-        private void Tap_ShowCreaeteCategory(object sender, MouseButtonEventArgs e)
+   
+
+        private void OpenOtherMenuCategory(object sender, MouseButtonEventArgs e)
         {
-            
-            Storyboard storyboard = FindResource("ShowCreateCategory") as Storyboard;
-
+            otherMenuCategoryPopup.IsOpen = true;
         }
 
+        private void otherMenuCategoryPopup_MouseLeave(object sender, MouseEventArgs e)
+        {
+            otherMenuCategoryPopup.IsOpen = false;
+        }
 
+       
 
-        //private void ListBoxItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        //{
+        private void otherMenuCashPopup_MouseLeave(object sender, MouseEventArgs e)
+        {
+            otherMenuCashPopup.IsOpen = false;
+        }
 
-        //        // Запуск анімації для gridCashCreate
-        //        var storyboard = FindResource("ShowCreateCash") as Storyboard;
-        //        if (storyboard != null)
-        //        {
-        //            Storyboard.SetTarget(storyboard, gridCashCreate);
-        //            storyboard.Begin();
-        //        }
+        private void OpenOtherMenuCash(object sender, MouseButtonEventArgs e)
+        {
+            otherMenuCashPopup.IsOpen = true;
+        }
+       
 
-        //}
+        private void ChangeGraph(object sender, MouseButtonEventArgs e)
+        {
+
+            if ((sender as Border).Name == "Stovb_Bord")
+            {
+                diagramStovb.Visibility = Visibility.Visible;
+                diagramCircle.Visibility = Visibility.Hidden;
+                
+            }
+            else
+            {
+                diagramStovb.Visibility = Visibility.Hidden;
+                diagramCircle.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            if((sender as Hyperlink).Name== "danaHyper")
+            {
+                Process.Start(new ProcessStartInfo("mailto:antoniukdana0608@gmail.com") { UseShellExecute = true });
+            }
+            else
+            {
+                Process.Start(new ProcessStartInfo("mailto:hasiukiv@gmail.com") { UseShellExecute = true });
+            }
+          
+        }
+
+       
     }
 }

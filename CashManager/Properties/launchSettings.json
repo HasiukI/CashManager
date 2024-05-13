@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CashManager": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

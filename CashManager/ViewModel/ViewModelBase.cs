@@ -16,5 +16,7 @@ namespace CashManager.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+
     }
 }
