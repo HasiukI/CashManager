@@ -27,6 +27,9 @@ namespace CashManager.ViewModel
         public ICommand DeleteImageBackGroundCommand { get; }
         public ICommand HideOrShowProfitCategorriesCommand { get; }
         public ICommand HideOrShowCostsCategorriesCommand { get; }
+        public ICommand ShowCategoryCommand { get; }
+        public ICommand ShowCashCommand { get; }
+        public ICommand ShowPropertyCommand { get; }
 
         public PropertyViewModel(Data data, IRepository repository)
         {
@@ -41,6 +44,9 @@ namespace CashManager.ViewModel
             DeleteImageBackGroundCommand = new AsyncCommand(DeleteImageBackGround);
             HideOrShowProfitCategorriesCommand = new Command(HideOrShowProfitCategorries);
             HideOrShowCostsCategorriesCommand = new Command(HideOrShowCostsCategorries);
+            ShowCategoryCommand = new Command(ShowCategory);
+            ShowCashCommand = new Command(ShowCash);
+            ShowPropertyCommand = new Command(ShowProperty);
         }
 
         #region Property
@@ -113,9 +119,65 @@ namespace CashManager.ViewModel
 
             }
         }
+        private int _zIndexCategory;
+        public int ZIndexCategory
+        {
+            get => _zIndexCategory;
+            set
+            {
+                if (_zIndexCategory != value)
+                {
+                    _zIndexCategory = value;
+                    onPropertyChanged(nameof(ZIndexCategory));
+                }
+            }
+        }
+
+        private int _zIndexCash;
+        public int ZIndexCash
+        {
+            get => _zIndexCash;
+            set
+            {
+                if (_zIndexCash != value)
+                {
+                    _zIndexCash = value;
+                    onPropertyChanged(nameof(ZIndexCash));
+                }
+            }
+        }
+        private int _zIndexProperty;
+        public int ZIndexProperty
+        {
+            get => _zIndexProperty;
+            set
+            {
+                if (_zIndexProperty != value)
+                {
+                    _zIndexProperty = value;
+                    onPropertyChanged(nameof(ZIndexProperty));
+                }
+            }
+        }
         #endregion
 
         #region Command
+        private void ShowProperty() {
+            ZIndexCash = 2;
+            ZIndexCategory = 2;
+            ZIndexProperty = 3;
+        }
+        private void ShowCash() {
+            ZIndexCash = 3;
+            ZIndexCategory = 2;
+            ZIndexProperty = 2;
+        }
+        private void ShowCategory() {
+            ZIndexCash = 2;
+            ZIndexCategory = 3;
+            ZIndexProperty = 2;
+        }
+
         private void HideOrShowProfitCategorries()
         {
             IsHideCategoriesProfit = !IsHideCategoriesProfit;
@@ -197,6 +259,9 @@ namespace CashManager.ViewModel
                     CurentBackGroundPicture = BackGroundsPictures[0];
                 }
             }
+            ZIndexCash = 2;
+            ZIndexCategory = 2;
+            ZIndexProperty = 2;
         }
         #endregion
 

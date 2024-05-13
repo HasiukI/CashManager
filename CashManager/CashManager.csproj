@@ -16,6 +16,7 @@
     <None Remove="back.jpg" />
     <None Remove="bar-chart.png" />
     <None Remove="calendar.png" />
+    <None Remove="CashManagerLogo.png" />
     <None Remove="categoryCreate.png" />
     <None Remove="circle.png" />
     <None Remove="close.png" />
@@ -51,6 +52,7 @@
     <Resource Include="back.jpg" />
     <Resource Include="bar-chart.png" />
     <Resource Include="calendar.png" />
+    <Resource Include="CashManagerLogo.png" />
     <Resource Include="categoryCreate.png" />
     <Resource Include="circle.png" />
     <Resource Include="close.png" />

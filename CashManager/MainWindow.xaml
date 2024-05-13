@@ -10,6 +10,7 @@
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF" xmlns:lvc1="clr-namespace:LiveChartsCore.SkiaSharpView;assembly=LiveChartsCore.SkiaSharpView"
         mc:Ignorable="d"
         Title="CashManager" Height="580" Width="750" Background="White"
+       Icon="/CashManagerLogo.png"
 >
 
 
@@ -483,6 +484,7 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseLeftButtonUp">
                                 <i:InvokeCommandAction Command="{Binding Category.SetDefaultPropertyCommand}"/>
+                                <i:InvokeCommandAction Command="{Binding Property.ShowCategoryCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
 
@@ -533,11 +535,12 @@
 
                 <!--Options-->
                 <Border Margin="10 5" Padding="5" CornerRadius="20" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Style="{StaticResource HoverBorder}">
-                    <Border.Triggers>
-                        <EventTrigger RoutedEvent="Border.MouseLeftButtonUp">
-                            <BeginStoryboard Storyboard="{StaticResource ShowProperty}" />
-                        </EventTrigger>
-                    </Border.Triggers>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction Command="{Binding Property.ShowPropertyCommand}"/>
+                            <ei:ControlStoryboardAction  Storyboard="{StaticResource ShowProperty}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <Image Width="20" Height="20" Source="/setting.png"/>
                 </Border>
             </Grid>
@@ -699,6 +702,7 @@
                                                     <i:EventTrigger EventName="MouseLeftButtonUp">
                                                         <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCash}"/>
                                                         <i:InvokeCommandAction Command="{Binding DataContext.Cash.SetDefaultPropertyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.Property.ShowCashCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                                 <Border.Style>
@@ -869,6 +873,7 @@
                                                 <i:EventTrigger EventName="MouseLeftButtonUp">
                                                     <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCash}"/>
                                                     <i:InvokeCommandAction Command="{Binding DataContext.Cash.SetDefaultPropertyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.Property.ShowCashCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                             <Border.Style>
@@ -1244,7 +1249,7 @@
            
 
             <!--Properrty-->
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="1" Panel.ZIndex="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
@@ -1370,7 +1375,7 @@
 
                     <TextBlock Grid.Row="0"  FontSize="16" Margin="5 0" VerticalAlignment="Center" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" Text="{Binding Language.PropertyImage}"/>
 
-                    <ListBox Grid.Row="1"  Margin="0 0 0 10" Padding="5" ItemsSource="{Binding Property.BackGroundsPictures}" SelectedItem="{Binding Property.CurentBackGroundPicture}" VerticalAlignment="Top" Background="Transparent" BorderThickness="0">
+                    <ListBox  Grid.Row="1"  Margin="0 0 0 10" Padding="5" ItemsSource="{Binding Property.BackGroundsPictures}" SelectedItem="{Binding Property.CurentBackGroundPicture}" VerticalAlignment="Top" Background="Transparent" BorderThickness="0">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -1407,19 +1412,13 @@
                                                 <Image Source="/delete.png" />
                                             </Border>
                                         </Border>
-                                        <Border x:Name="CurentImage" Width="30" Height="30" Padding="3" CornerRadius="10"  HorizontalAlignment="Left" VerticalAlignment="Top" Background="{Binding  Path=DataContext.Property.CurentColor.HardColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" >
-                                            <Image Source="/arrow-down.png"  RenderTransformOrigin="0.5,0.5" >
-                                                <Image.RenderTransform>
-                                                    <RotateTransform Angle="-20" />
-                                                </Image.RenderTransform>
-                                            </Image>
-                                        </Border>
+                                     
                                     </Grid>
                                 </Border>
                                 <DataTemplate.Triggers>
                                     <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="False">
                                         <Setter TargetName="DeleteButton" Property="Visibility" Value="Collapsed"/>
-                                        <Setter TargetName="CurentImage" Property="Visibility" Value="Collapsed"/>
+                                       
                                     </DataTrigger>
                                 </DataTemplate.Triggers>
                             </DataTemplate>
@@ -1450,7 +1449,7 @@
         </Grid>
 
         <!--CreateCategory-->
-        <Grid x:Name="gridCreateCategoryCont" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="600">
+        <Grid x:Name="gridCreateCategoryCont" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="600"  Panel.ZIndex="4">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.3"/>
             </Grid.Effect>
@@ -1589,74 +1588,80 @@
                             </StackPanel>
 
                             <!--Color-->
-                            <TextBlock Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Text="{Binding Language.ColorsCategory}" FontSize="14" />
+                            <StackPanel>
+                                <TextBlock Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Text="{Binding Language.ColorsCategory}" FontSize="14" />
 
-                            <ListBox Margin="0 10" ItemsSource="{Binding Category.ColorsForCategory}" SelectedItem="{Binding Category.ColorNewCategory}" Background="Transparent">
-                                <ListBox.Style>
-                                    <Style TargetType="ListBox">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                    </Style>
-                                </ListBox.Style>
+                                <ListBox  Margin="0 10" ItemsSource="{Binding Category.ColorsForCategory}" SelectedItem="{Binding Category.ColorNewCategory}" Background="Transparent">
+                                    <ListBox.Style>
+                                        <Style TargetType="ListBox">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </ListBox.Style>
 
-                                <ListBox.ItemContainerStyle>
-                                    <Style TargetType="ListBoxItem">
-                                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="ListBoxItem">
-                                                    <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}">
-                                                        <ContentPresenter />
-                                                    </Border>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsSelected" Value="True">
-                                                            <Setter TargetName="Border" Property="BorderThickness" Value="2" />
-                                                            <Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
-                                                            <Setter TargetName="Border" Property="CornerRadius" Value="18" />
-                                                            <Setter TargetName="Border" Property="Width" Value="29" />
-                                                            <Setter TargetName="Border" Property="Height" Value="29" />
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListBoxItem">
+                                                        <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}">
+                                                            <ContentPresenter />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter TargetName="Border" Property="BorderThickness" Value="2" />
+                                                                <Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
+                                                                <Setter TargetName="Border" Property="CornerRadius" Value="18" />
+                                                                <Setter TargetName="Border" Property="Width" Value="29" />
+                                                                <Setter TargetName="Border" Property="Height" Value="29" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
 
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Rows="2" />
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="2" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
 
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Padding="3" Width="25" Height="25">
-                                            <Ellipse Fill="{Binding}"  />
-                                        </Border>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Padding="3" Width="25" Height="25">
+                                                <Ellipse Fill="{Binding}"  />
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                           
 
                             <!--Image-->
-                            <TextBlock Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Text="{Binding Language.ImageCategories}" FontSize="14"  />
-                            <ListBox   ItemsSource="{Binding Category.ImagesForCategory}"  SelectedItem="{Binding Category.ImageNewCategory}" Background="Transparent">
-                                <ListBox.Style>
-                                    <Style TargetType="ListBox">
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                    </Style>
-                                </ListBox.Style>
+                            <StackPanel>
+                                <TextBlock Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Text="{Binding Language.ImageCategories}" FontSize="14"  />
+                                <ListBox   ItemsSource="{Binding Category.ImagesForCategory}"  SelectedItem="{Binding Category.ImageNewCategory}" Background="Transparent">
+                                    <ListBox.Style>
+                                        <Style TargetType="ListBox">
+                                            <Setter Property="BorderThickness" Value="0"/>
+                                        </Style>
+                                    </ListBox.Style>
 
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Rows="2" />
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <Image Source="{Binding}" Width="30"  HorizontalAlignment="Center"></Image>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="2" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding}" Width="30"  HorizontalAlignment="Center"></Image>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                          
                         </StackPanel>
 
                         <Line Grid.Column="1" Y1="0"  Y2="1" Stretch="Fill" Stroke="{Binding Property.CurentColor.HardColor}" Margin="10 0" StrokeThickness="1" />
@@ -1841,6 +1846,7 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding Category.SetToUpdateCategoryCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding Property.ShowCategoryCommand}"/>
                             <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCategory}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
@@ -1863,6 +1869,7 @@
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding Cash.SetToUpdateCashCommand}"/>
                             <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCash}"/>
+                            <i:InvokeCommandAction Command="{Binding Property.ShowCashCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <TextBlock Text="{Binding Language.Update}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}"/>
