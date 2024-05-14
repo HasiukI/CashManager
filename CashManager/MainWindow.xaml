@@ -236,6 +236,18 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border6" Storyboard.TargetProperty="(Border.CornerRadius)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>0,0,10,0</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>0,10,10,0</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="ShowProfitCategories">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="image2" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
@@ -262,6 +274,18 @@
                 <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border6" Storyboard.TargetProperty="(Border.CornerRadius)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>0,10,10,0</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>0,0,10,0</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="HideCostsCategories">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImageArrowcosts" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
@@ -284,6 +308,18 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border8" Storyboard.TargetProperty="(Border.CornerRadius)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>0,0,0,10</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>10,0,0,10</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="ShowCostsCategories">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ImageArrowcosts" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)">
@@ -310,6 +346,18 @@
                 <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
                 <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border8" Storyboard.TargetProperty="(Border.CornerRadius)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>10,0,0,10</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.5000000">
+                    <DiscreteObjectKeyFrame.Value>
+                        <CornerRadius>0,0,0,10</CornerRadius>
+                    </DiscreteObjectKeyFrame.Value>
+                </DiscreteObjectKeyFrame>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <!--Cash-->
         <Storyboard x:Key="ShowCreateCash">
@@ -613,7 +661,7 @@
                             </Grid.RowDefinitions>
 
 
-                            <Border x:Name="border6" Grid.Row="1"  Background="Green" CornerRadius="0 0 10 0" HorizontalAlignment="Stretch" >
+                            <Border x:Name="border6" Grid.Row="1"  Background="#68C37F" CornerRadius="0 0 10 0" HorizontalAlignment="Stretch" >
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -750,7 +798,8 @@
 
                     <Grid x:Name="diagramStovb" Grid.Column="1"  >
 
-                        <lvc:CartesianChart Series="{Binding Data.Series}" XAxes="{x:Null}" Margin="20">
+                        <lvc:CartesianChart Series="{Binding Data.Series}"  Margin="20">
+                      
                         </lvc:CartesianChart>
                     </Grid>
 
@@ -783,14 +832,14 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
 
-                            <Border Grid.Row="1"  Background="Red" CornerRadius="0 0 0 10">
+                            <Border x:Name="border8" Grid.Row="1"  Background="#D24040" CornerRadius="0 0 0 10">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Border  Grid.Column="0" Padding="3" Width="30" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                    <Border x:Name="border7"  Grid.Column="0" Padding="3" Width="30" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
                                         <i:Interaction.Triggers>
                                             <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesCosts}" Value="True">
                                                 <ei:ControlStoryboardAction Storyboard="{StaticResource HideCostsCategories}"/>
@@ -1023,7 +1072,7 @@
                                 <DataTemplate>
                                     <StackPanel>
                                         <TextBlock Foreground="{Binding Path=DataContext.Property.CurentColor.ColorForFontsOnWhite, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" VerticalAlignment="Top"  Text="{Binding Date.Day}"/>
-                                        <TextBlock Foreground="Green" Text="{Binding TotalProfit}">
+                                        <TextBlock Foreground="#68C37F" Text="{Binding TotalProfit}">
                                             <TextBlock.Style>
                                                 <Style TargetType="TextBlock">
                                                     <Style.Triggers>
@@ -1034,7 +1083,7 @@
                                                 </Style>
                                             </TextBlock.Style>
                                         </TextBlock>
-                                        <TextBlock  Foreground="Red" Text="{Binding TotalCosts}" >
+                                        <TextBlock  Foreground="#D24040" Text="{Binding TotalCosts}" >
                                             <TextBlock.Style>
                                                 <Style TargetType="TextBlock">
                                                     <Style.Triggers>
@@ -1144,11 +1193,11 @@
                                                         <Style TargetType="TextBlock">
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding Category.isCosts}" Value="True">
-                                                                    <Setter Property="Foreground" Value="Red"/>
+                                                                    <Setter Property="Foreground" Value="#D24040"/>
                                                                     <Setter Property="Text" Value="-"/>
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Category.isCosts}" Value="False">
-                                                                    <Setter Property="Foreground" Value="Green"/>
+                                                                    <Setter Property="Foreground" Value="#68C37F"/>
                                                                     <Setter Property="Text" Value="+"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
@@ -1162,10 +1211,10 @@
                                                         <Style TargetType="TextBlock">
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding Category.isCosts}" Value="True">
-                                                                    <Setter Property="Foreground" Value="Red"/>
+                                                                    <Setter Property="Foreground" Value="#D24040"/>
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding Category.isCosts}" Value="False">
-                                                                    <Setter Property="Foreground" Value="Green"/>
+                                                                    <Setter Property="Foreground" Value="#68C37F"/>
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>

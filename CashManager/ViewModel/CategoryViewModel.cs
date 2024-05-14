@@ -488,23 +488,22 @@ namespace CashManager.ViewModel
         {
             return new List<string>
             {
-               "#FFB6C1",
-               "#FFDAB9",
-               "#7DDA58",
-               "#E0FFFF",
-               "#CC6CE7",
-               "#F5F5DC",
-               "#76b5c5",
-               "#FFEFD5",
-               "#F0F8FF",
-               "#F5FFFA",
-               "#D3D3D3",
-               "#FFB347",
-               "#7FFFD4",
                "#1e81b0",
-               "#E6E6FA",
-               "#FFF8DC"
-
+               "#cc6ce7",
+               "#7dda58",
+               "#f7daff",
+               "#31b1e0",
+               "#e0ffff",
+               "#ffb347",
+               "#45b5aa",
+               "#4974a5",
+               "#bc8dbc",
+               "#d59890",
+               "#a3ffb4",
+               "#7a00eb",
+               "#b4b08d",
+               "#FFF8DC",
+               "#fff27a"
              };
         }
 
