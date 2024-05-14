@@ -562,7 +562,7 @@
                 <!--CurentSum-->
                 <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
                     <TextBlock FontSize="15" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" Text="{Binding Language.MainTotal}" Margin="3 0" VerticalAlignment="Bottom"/>
-                    <TextBlock FontSize="18" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" FontWeight="Bold" Text="{Binding Data.MainInfo.TotalSum}"/>
+                    <TextBlock FontSize="18" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" FontWeight="Bold" Text="{Binding Data.MainInfo.TotalSum, StringFormat={}{0:F2}}"/>
                     <TextBlock FontSize="16" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" FontWeight="Bold" Text="$" VerticalAlignment="Bottom"/>
                 </StackPanel>
             </Grid>
@@ -1202,7 +1202,7 @@
         </Grid>
 
         <!--Property-->
-        <Grid  x:Name="gridproperty"  Background="{Binding Property.CurentColor.MainColor}" HorizontalAlignment="Stretch" Opacity="0" Visibility="Collapsed">
+        <Grid  x:Name="gridproperty"  Background="{Binding Property.CurentColor.MainColor}" HorizontalAlignment="Stretch" Opacity="0" Visibility="Collapsed" Panel.ZIndex="{Binding Property.ZIndexProperty}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
@@ -1227,7 +1227,7 @@
                         </Border>
 
 
-                        <StackPanel Grid.Column="1" Margin="10 20">
+                        <StackPanel Grid.Column="1" Margin="10 30">
                             <TextBlock Grid.Row="0" Margin="5" Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" TextWrapping="Wrap" Text="{Binding Language.PropertyOpus1}"><Hyperlink Click="Hyperlink_Click"  Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" FontStyle="Italic" FontWeight="Medium"><TextBlock Text="{Binding Language.PropertyOpusHyper1}"/></Hyperlink></TextBlock>
                             <TextBlock  Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}"  TextWrapping="Wrap" Text="{Binding Language.PropertyOpus2}">
                              <Hyperlink x:Name="danaHyper"  Click="Hyperlink_Click" Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" FontStyle="Italic" FontWeight="Medium"> <TextBlock Text="{Binding Language.PropertyOpusHyper2}"/></Hyperlink>
@@ -1399,7 +1399,7 @@
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Padding="3" Width="200" Height="140" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Border Margin="0 5"  Width="230" Height="140" CornerRadius="3" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="2" BorderBrush="{Binding Path=DataContext.Property.CurentColor.HardColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}">
                                     <Grid >
                                         <Image Source="{Binding}" Stretch="Fill"/>
                                         <Border x:Name="DeleteButton" Width="30" Height="30" Padding="3" CornerRadius="10" ToolTip="Delete" HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{StaticResource HoverBorder}">
@@ -1449,7 +1449,7 @@
         </Grid>
 
         <!--CreateCategory-->
-        <Grid x:Name="gridCreateCategoryCont" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="600"  Panel.ZIndex="4">
+        <Grid x:Name="gridCreateCategoryCont" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed" Width="600"  Panel.ZIndex="{Binding Property.ZIndexCategory}">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.3"/>
             </Grid.Effect>
@@ -1713,7 +1713,7 @@
 
 
         <!--Create Cash-->
-        <Grid x:Name="gridCreateCashCont"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Background="Transparent">
+        <Grid x:Name="gridCreateCashCont"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Background="Transparent" Panel.ZIndex="{Binding Property.ZIndexCash}">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="10" Opacity="0.3"/>
             </Grid.Effect>
