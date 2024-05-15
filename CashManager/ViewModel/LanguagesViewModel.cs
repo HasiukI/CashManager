@@ -159,6 +159,11 @@ namespace CashManager.ViewModel
         public string MainTotal { get => CurentLanguage.Strings["MainTotal"]; }
         public string Delete { get => CurentLanguage.Strings["Delete"]; }
         public string Update { get => CurentLanguage.Strings["Update"]; }
+       
+        public string MessageBoxCategory { get => CurentLanguage.Strings["MessageBoxCategory"]; }
+        public string MessageBoxCash { get => CurentLanguage.Strings["MessageBoxCash"]; }
+
+        
 
         #endregion
 
@@ -224,6 +229,9 @@ namespace CashManager.ViewModel
             Eng.Strings.Add("MainTotal", "Total sum:");
             Eng.Strings.Add("Delete", "Delete");
             Eng.Strings.Add("Update", "Update");
+
+            Eng.Strings.Add("MessageBoxCash", "Do you really want to delete a notation ");
+            Eng.Strings.Add("MessageBoxCategory", "Do you really want to delete the category");
             return Eng;
         }
 
@@ -293,6 +301,9 @@ namespace CashManager.ViewModel
             UKR.Strings.Add("MainTotal", "Загальна сума:");
             UKR.Strings.Add("Delete", "Видалити");
             UKR.Strings.Add("Update", "Змінити");
+
+            UKR.Strings.Add("MessageBoxCash", "Ви дійсно бажаєте видалити запис");
+            UKR.Strings.Add("MessageBoxCategory", "Ви дійсно хочете видалити категорію");
 
             return UKR;
         }

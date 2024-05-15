@@ -30,6 +30,7 @@ namespace CashManager.ViewModel
         public ICommand ShowCategoryCommand { get; }
         public ICommand ShowCashCommand { get; }
         public ICommand ShowPropertyCommand { get; }
+        public ICommand ShowPropertyOther { get; }
 
         public PropertyViewModel(Data data, IRepository repository)
         {
@@ -47,6 +48,7 @@ namespace CashManager.ViewModel
             ShowCategoryCommand = new Command(ShowCategory);
             ShowCashCommand = new Command(ShowCash);
             ShowPropertyCommand = new Command(ShowProperty);
+            ShowPropertyOther= new Command(ShowOther);
         }
 
         #region Property
@@ -133,6 +135,19 @@ namespace CashManager.ViewModel
             }
         }
 
+        private int _zIndexOther;
+        public int ZIndexOther
+        {
+            get => _zIndexOther;
+            set
+            {
+                if (_zIndexOther != value)
+                {
+                    _zIndexOther = value;
+                    onPropertyChanged(nameof(ZIndexOther));
+                }
+            }
+        }
         private int _zIndexCash;
         public int ZIndexCash
         {
@@ -162,20 +177,30 @@ namespace CashManager.ViewModel
         #endregion
 
         #region Command
+        private void ShowOther()
+        {
+            ZIndexOther = 3;
+            ZIndexCash = 2;
+            ZIndexCategory = 2;
+            ZIndexProperty = 2;
+        }
         private void ShowProperty() {
             ZIndexCash = 2;
             ZIndexCategory = 2;
             ZIndexProperty = 3;
+            ZIndexOther = 2;
         }
         private void ShowCash() {
             ZIndexCash = 3;
             ZIndexCategory = 2;
             ZIndexProperty = 2;
+            ZIndexOther = 2;
         }
         private void ShowCategory() {
             ZIndexCash = 2;
             ZIndexCategory = 3;
             ZIndexProperty = 2;
+            ZIndexOther = 2;
         }
 
         private void HideOrShowProfitCategorries()

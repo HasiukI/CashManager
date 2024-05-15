@@ -229,7 +229,7 @@ namespace CashManager.ViewModel
                 Id=this._data.MainInfo.LastIdCash++, 
                 CategoryId = this._data.CurentCategory.Id, 
                 Price = TotalPrice, 
-                CreatedAt = this._data.SelectedDate,
+                CreatedAt = this._data.SelectedDate.Date.Add(DateTime.Now.TimeOfDay),
                 Description= this.CashDescription
             };
 
@@ -244,7 +244,7 @@ namespace CashManager.ViewModel
         
         private async Task DeleteCash()
         {
-            var rez = MessageBox.Show($"Ви дійсно хочете видалити {SelectedHistory.Cash.Price} з категорії {SelectedHistory.Category.Name}?", "Delete?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var rez = MessageBox.Show($"{_language.MessageBoxCash} {SelectedHistory.Cash.Price}?", "Delete?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (rez == MessageBoxResult.Yes)
             {
@@ -294,7 +294,7 @@ namespace CashManager.ViewModel
             {
                 CashDescription = "none";
             }
-            if(Regex.IsMatch(CashDescription, @"[^a-zA-Z0-9\u0400-\u04FF]"))
+            if(Regex.IsMatch(CashDescription, @"[^a-zA-Z0-9\u0400-\u04FF., ]"))
             {
                 ExeptionCash = _language.ExeptionCreateCashDescription;
                 onPropertyChanged(nameof(ExeptionCash));

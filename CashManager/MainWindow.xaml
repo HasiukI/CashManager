@@ -554,11 +554,13 @@
                                 <TranslateTransform X="0"/>
                             </TransformGroup>
                         </Border.RenderTransform>
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="Border.MouseLeftButtonUp">
-                                <BeginStoryboard Storyboard="{StaticResource ShowCalendar}" />
-                            </EventTrigger>
-                        </Border.Triggers>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding Property.ShowPropertyOther}"/>
+                                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCalendar}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        
                         <Image x:Name="image" Width="30" Source="/calendar.png" />
                     </Border>
 
@@ -572,11 +574,12 @@
                                 <TranslateTransform X="0"/>
                             </TransformGroup>
                         </Border.RenderTransform>
-                        <Border.Triggers>
-                            <EventTrigger RoutedEvent="Border.MouseLeftButtonUp">
-                                <BeginStoryboard Storyboard="{StaticResource ShowHistory}" />
-                            </EventTrigger>
-                        </Border.Triggers>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding Property.ShowPropertyOther}"/>
+                                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowHistory}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <Image x:Name="image1" Width="30" Source="/file.png"/>
                     </Border>
                 </StackPanel>
@@ -969,7 +972,7 @@
         </Grid>
 
         <!--Calendar and History-->
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" Panel.ZIndex="2">
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Background="Transparent" Panel.ZIndex="{Binding Property.ZIndexOther}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
@@ -1052,13 +1055,13 @@
                         </Grid.RowDefinitions>
 
 
-                        <TextBlock x:Name="TB_MondayCalendar"  Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"   Grid.Row="1" Grid.Column="0" Text="{Binding Language.CalendarMon}" VerticalAlignment="Bottom"/>
-                        <TextBlock x:Name="TB_TuesdayCalendar"  Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Grid.Row="1" Grid.Column="1" Text="{Binding Language.CalendarTue}" VerticalAlignment="Bottom"/>
-                        <TextBlock x:Name="TB_WednesdayCalendar" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" Grid.Row="1" Grid.Column="2" Text="{Binding Language.CalendarWed}" VerticalAlignment="Bottom"/>
-                        <TextBlock x:Name="TB_ThursdayCalendar" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Grid.Row="1" Grid.Column="3" Text="{Binding Language.CalendarThu}" VerticalAlignment="Bottom"/>
-                        <TextBlock x:Name="TB_FridayCalendar" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Grid.Row="1" Grid.Column="4" Text="{Binding Language.CalendarFri}" VerticalAlignment="Bottom"/>
-                        <TextBlock x:Name="TB_SaturdayCalendar" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Grid.Row="1" Grid.Column="5" Text="{Binding Language.CalendarSat}" VerticalAlignment="Bottom"/>
-                        <TextBlock x:Name="TB_SundayCalendar" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}"  Grid.Row="1" Grid.Column="6" Text="{Binding Language.CalendarSun}" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="TB_MondayCalendar"  Foreground="Black"   Grid.Row="1" Grid.Column="0" Text="{Binding Language.CalendarMon}" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="TB_TuesdayCalendar" Foreground="Black"   Grid.Row="1" Grid.Column="1" Text="{Binding Language.CalendarTue}" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="TB_WednesdayCalendar" Foreground="Black"  Grid.Row="1" Grid.Column="2" Text="{Binding Language.CalendarWed}" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="TB_ThursdayCalendar" Foreground="Black"   Grid.Row="1" Grid.Column="3" Text="{Binding Language.CalendarThu}" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="TB_FridayCalendar" Foreground="Black"   Grid.Row="1" Grid.Column="4" Text="{Binding Language.CalendarFri}" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="TB_SaturdayCalendar" Foreground="Black"   Grid.Row="1" Grid.Column="5" Text="{Binding Language.CalendarSat}" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="TB_SundayCalendar" Foreground="Black"   Grid.Row="1" Grid.Column="6" Text="{Binding Language.CalendarSun}" VerticalAlignment="Bottom"/>
 
                         <ListBox  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="5" ItemsSource="{Binding Data.DaysHistory}" SelectedItem="{Binding Data.SelectedDayHistory}" BorderThickness="0">
 
@@ -1071,7 +1074,7 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <TextBlock Foreground="{Binding Path=DataContext.Property.CurentColor.ColorForFontsOnWhite, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" VerticalAlignment="Top"  Text="{Binding Date.Day}"/>
+                                        <TextBlock Foreground="Black"  VerticalAlignment="Top"  Text="{Binding Date.Day}"/>
                                         <TextBlock Foreground="#68C37F" Text="{Binding TotalProfit}">
                                             <TextBlock.Style>
                                                 <Style TargetType="TextBlock">
@@ -1831,7 +1834,7 @@
                                                     <Setter.Value>
                                                         <VisualBrush Stretch="None">
                                                             <VisualBrush.Visual>
-                                                                <Label Content="{Binding Path=DataContext.Cash.CashDescription, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Foreground="Gray"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                                <Label Content="description" Foreground="Gray"  HorizontalAlignment="Left" VerticalAlignment="Top"/>
                                                             </VisualBrush.Visual>
                                                         </VisualBrush>
                                                     </Setter.Value>

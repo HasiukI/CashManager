@@ -215,11 +215,10 @@ namespace CashManager.ViewModel
             get => _newCategoryProfitAnimation;
             set
             {
-                if(value!= _newCategoryProfitAnimation)
-                {
+                
                     _newCategoryProfitAnimation = value;
                     onPropertyChanged(nameof(NewCategoryProfitAnimation));
-                }
+                
             }
         }
 
@@ -229,11 +228,10 @@ namespace CashManager.ViewModel
             get => _newCategoryCostsAnimation;
             set
             {
-                if (value != _newCategoryCostsAnimation)
-                {
+                
                     _newCategoryCostsAnimation = value;
                     onPropertyChanged(nameof(NewCategoryCostsAnimation));
-                }
+                
             }
         }
         private bool _visibilityPopup;
@@ -255,7 +253,8 @@ namespace CashManager.ViewModel
        
         public void SetDefaultProperty()
         {
-            
+                NewCategoryCostsAnimation = false;
+                NewCategoryProfitAnimation = false;
                 ExeptionNameCategory = "";
                 ExeptionTypeCategory = "";
                 NameNewCategory = "";
@@ -300,6 +299,8 @@ namespace CashManager.ViewModel
 
         public void SetToUpdate()
         {
+            NewCategoryCostsAnimation = false;
+            NewCategoryProfitAnimation = false;
             VisibilityUpdateCategory = true;
             VisibilityCreateCategory = false;
 
@@ -331,7 +332,7 @@ namespace CashManager.ViewModel
 
         public async Task DeleteCategory()
         {
-            var rez = MessageBox.Show($"Ви дійсно хочете видалити категорію {this._data.CurentCategory.Name}?", "Delete?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var rez = MessageBox.Show($"{_language.MessageBoxCategory} {this._data.CurentCategory.Name}?", "Delete?", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (rez == MessageBoxResult.Yes)
             {
@@ -363,9 +364,9 @@ namespace CashManager.ViewModel
                 IsActual = true
             };
 
-            if (_colorNewCategory == null)
+            if (ColorNewCategory == null ||  String.IsNullOrEmpty(ColorNewCategory))
             {
-                category.Color = "#a23a96";
+                category.Color = "#3498DB";
             }
 
             if (_imageNewCategory == null)
@@ -392,7 +393,6 @@ namespace CashManager.ViewModel
             if (_isCostsNewCategory == true)
             {
                 _isCostsNewCategory = null;
-                // WidthNewCategoryCosts = 30;
                 NewCategoryCostsAnimation = false;
             }
             else
@@ -404,10 +404,6 @@ namespace CashManager.ViewModel
                 {
                     NewCategoryProfitAnimation = false;
                 }
-                //WidthNewCategoryCosts = 120;
-
-                //if (WidthNewCategoryProfit == 120)
-                //    WidthNewCategoryProfit = 30;
             }
                 
         }
@@ -417,16 +413,12 @@ namespace CashManager.ViewModel
             if (_isCostsNewCategory == false)
             {
                 _isCostsNewCategory = null;
-                //WidthNewCategoryProfit = 30;
                 NewCategoryProfitAnimation= false;
             }
             else
             {
                 _isCostsNewCategory = false;
-                //WidthNewCategoryProfit = 120;
 
-                //if (WidthNewCategoryCosts == 120)
-                //    WidthNewCategoryCosts = 30;
                 NewCategoryProfitAnimation = true;
                 if (NewCategoryCostsAnimation)
                 {
@@ -464,7 +456,7 @@ namespace CashManager.ViewModel
                 return false;
             }
 
-            if (Regex.IsMatch(_nameNewCategory, @"[^a-zA-Z0-9\u0400-\u04FF]"))
+            if (Regex.IsMatch(_nameNewCategory, @"[^a-zA-Z0-9\u0400-\u04FF., ] "))
             {
                 ExeptionNameCategory = _language.ExeptionNameSymbolCategory;
                 return false;
@@ -487,23 +479,24 @@ namespace CashManager.ViewModel
         private List<string> SetColors()
         {
             return new List<string>
-            {
-               "#1e81b0",
-               "#cc6ce7",
+            {  
                "#7dda58",
                "#f7daff",
-               "#31b1e0",
-               "#e0ffff",
                "#ffb347",
                "#45b5aa",
-               "#4974a5",
-               "#bc8dbc",
-               "#d59890",
-               "#a3ffb4",
+               "#865082",
+               "#ae5e54",
+               "#36f25c",
                "#7a00eb",
-               "#b4b08d",
-               "#FFF8DC",
-               "#fff27a"
+               "#ecb906",
+               "#C0392B",
+               "#9B59B6",
+               "#2980B9",
+               "#27AE60",
+               "#D35400",
+               "#5D6D7E",
+               "#fde90d",
+
              };
         }
 
