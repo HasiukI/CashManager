@@ -26,6 +26,8 @@ namespace CashManager.ViewModel
         public ICommand SetDefaultPropertyCommand { get; }
         public ICommand UpCountCommand { get; }
         public ICommand DownCountCommand { get; }
+        public ICommand ShowPopupCommand { get; }
+        public ICommand ClosePopupCommand { get; }
 
         public CashViewModel(Data data, IRepository repository, LanguagesViewModel language)
         {
@@ -40,6 +42,8 @@ namespace CashManager.ViewModel
             SetDefaultPropertyCommand = new Command(SetDefaultProperty);
             UpCountCommand = new Command(UpCount);
             DownCountCommand = new Command(DownCount);
+            ShowPopupCommand = new Command(ShowPopup);
+            ClosePopupCommand = new Command(ClosePopup);
         }
 
         #region Property
@@ -160,10 +164,34 @@ namespace CashManager.ViewModel
                 }
             }
         }
+
+        private bool _visibilityPopup;
+        public bool VisibilityPopup
+        {
+            get => _visibilityPopup;
+            set
+            {
+                if (_visibilityPopup != value)
+                {
+                    _visibilityPopup = value;
+                    onPropertyChanged(nameof(VisibilityPopup));
+                }
+            }
+        }
         #endregion
 
 
         #region Command
+
+        public void ShowPopup()
+        {
+            VisibilityPopup = true;
+        }
+        public void ClosePopup()
+        {
+            VisibilityPopup = false;
+        }
+
         public void SetDefaultProperty()
         {
             CashDescription = String.Empty;

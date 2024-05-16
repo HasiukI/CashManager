@@ -38,6 +38,8 @@ namespace CashManager.ViewModel
         public ICommand ProfitNewCategory { get; }
         public ICommand CostsNewCategory { get; }
         public ICommand SetDefaultPropertyCommand { get; }
+        public ICommand ShowPopupCommand { get; }
+        public ICommand ClosePopupCommand { get; }
   
 
         public CategoryViewModel(Data data, IRepository repository, LanguagesViewModel language) {
@@ -55,6 +57,8 @@ namespace CashManager.ViewModel
             CostsNewCategory = new Command(TapCostsNewCategory);
             ProfitNewCategory = new Command(TapProfitNewCategory);
             SetDefaultPropertyCommand = new Command(SetDefaultProperty);
+            ShowPopupCommand = new Command(ShowPopup);
+            ClosePopupCommand = new Command(ClosePopup);
           
             ImagesForCategory = _repository.ReadAllStaticPictures();
 
@@ -250,7 +254,15 @@ namespace CashManager.ViewModel
         #endregion
 
         #region Command
-       
+        public void ClosePopup()
+        {
+            VisibilityPopup = false;
+        }
+        public void ShowPopup()
+        {
+            VisibilityPopup = true;
+        }
+
         public void SetDefaultProperty()
         {
                 NewCategoryCostsAnimation = false;

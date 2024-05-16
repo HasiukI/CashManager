@@ -10,7 +10,7 @@
         xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF" xmlns:lvc1="clr-namespace:LiveChartsCore.SkiaSharpView;assembly=LiveChartsCore.SkiaSharpView"
         mc:Ignorable="d"
         Title="CashManager" Height="580" Width="750" Background="White"
-       Icon="/CashManagerLogo.png"
+       Icon="pack://application:,,,/Images/StaticImages/Logo.png"
 >
 
 
@@ -42,7 +42,7 @@
                             <i:InvokeCommandAction Command="{Binding Path=DataContext.Cash.UpCountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <Image Source="/arrow-up.png" Width="20"/>
+                    <Image Source="pack://application:,,,/Images/StaticImages/arrow-up.png" Width="20"/>
                 </Border>
                 <Border Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" Padding="5"  Background="{Binding Path=DataContext.Property.CurentColor.HardColor, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" >
                     <i:Interaction.Triggers>
@@ -50,7 +50,7 @@
                             <i:InvokeCommandAction Command="{Binding Path=DataContext.Cash.DownCountCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <Image Source="/arrow-down.png" Width="20"/>
+                    <Image Source="pack://application:,,,/Images/StaticImages/arrow-down.png" Width="20"/>
                 </Border>
             </Grid>
         </DataTemplate>
@@ -541,7 +541,7 @@
                                 <BeginStoryboard Storyboard="{StaticResource ShowCreateCategory}" />
                             </EventTrigger>
                         </Border.Triggers>
-                        <Image  Width="30" Source="/categoryCreate.png"/>
+                        <Image  Width="30" Source="pack://application:,,,/Images/StaticImages/categoryCreate.png"/>
                     </Border>
 
                     <!--Show Calendar-->
@@ -560,8 +560,8 @@
                                 <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCalendar}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                        
-                        <Image x:Name="image" Width="30" Source="/calendar.png" />
+
+                        <Image x:Name="image" Width="30" Source="pack://application:,,,/Images/StaticImages/calendar.png" />
                     </Border>
 
                     <!--Show History-->
@@ -580,7 +580,7 @@
                                 <ei:ControlStoryboardAction Storyboard="{StaticResource ShowHistory}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                        <Image x:Name="image1" Width="30" Source="/file.png"/>
+                        <Image x:Name="image1" Width="30" Source="pack://application:,,,/Images/StaticImages/file.png"/>
                     </Border>
                 </StackPanel>
 
@@ -592,7 +592,7 @@
                             <ei:ControlStoryboardAction  Storyboard="{StaticResource ShowProperty}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <Image Width="20" Height="20" Source="/setting.png"/>
+                    <Image Width="20" Height="20" Source="pack://application:,,,/Images/StaticImages/setting.png"/>
                 </Border>
             </Grid>
 
@@ -626,7 +626,7 @@
                         <VisualBrush.Visual>
                             <Grid>
                                 <Rectangle Fill="{Binding Property.CurentColor.LightColor}" Width="30" Height="30"/>
-                                <Image Source="{Binding Property.CurentBackGroundPicture}" Stretch="UniformToFill">
+                                <Image Source="{Binding Property.CurentBackGroundPicture}" Stretch="Uniform">
                                     <Image.Style>
                                         <Style TargetType="{x:Type Image}">
                                             <Style.Triggers>
@@ -664,7 +664,7 @@
                             </Grid.RowDefinitions>
 
 
-                            <Border x:Name="border6" Grid.Row="1"  Background="#68C37F" CornerRadius="0 0 10 0" HorizontalAlignment="Stretch" >
+                            <Border x:Name="border6" Grid.Row="1"  Style="{StaticResource HoverProfit}" CornerRadius="0 0 10 0" HorizontalAlignment="Stretch" >
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -692,7 +692,7 @@
                                                 <TranslateTransform/>
                                             </TransformGroup>
                                         </Border.RenderTransform>
-                                        <Image x:Name="image2" Source="/arrow-side.png" RenderTransformOrigin="0.5,0.5">
+                                        <Image x:Name="image2" Source="pack://application:,,,/Images/StaticImages/arrow-side.png" RenderTransformOrigin="0.5,0.5">
                                             <Image.RenderTransform>
                                                 <TransformGroup>
                                                     <ScaleTransform/>
@@ -748,12 +748,15 @@
 
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Border Background="{Binding DataContext.Property.CurentColor.MainColor, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CornerRadius="0 20 20 0" Margin="0,3,0,3"  MouseRightButtonUp="OpenOtherMenuCategory">
+                                            <Border Background="{Binding DataContext.Property.CurentColor.MainColor, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CornerRadius="0 20 20 0" Margin="0,3,0,3">
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="MouseLeftButtonUp">
                                                         <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCash}"/>
                                                         <i:InvokeCommandAction Command="{Binding DataContext.Cash.SetDefaultPropertyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                                                         <i:InvokeCommandAction Command="{Binding DataContext.Property.ShowCashCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                                    </i:EventTrigger>
+                                                    <i:EventTrigger EventName="MouseRightButtonUp">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.Category.ShowPopupCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                                 <Border.Style>
@@ -835,7 +838,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
 
-                            <Border x:Name="border8" Grid.Row="1"  Background="#D24040" CornerRadius="0 0 0 10">
+                            <Border x:Name="border8" Grid.Row="1"  Style="{StaticResource HoverCosts}" CornerRadius="0 0 0 10">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -862,7 +865,7 @@
                                                 <TranslateTransform/>
                                             </TransformGroup>
                                         </Border.RenderTransform>
-                                        <Image x:Name="ImageArrowcosts" Source="/arrow-side.png" RenderTransformOrigin="0.5,0.5">
+                                        <Image x:Name="ImageArrowcosts" Source="pack://application:,,,/Images/StaticImages/arrow-side.png" RenderTransformOrigin="0.5,0.5">
                                             <Image.RenderTransform>
                                                 <TransformGroup>
                                                     <ScaleTransform/>
@@ -920,12 +923,15 @@
 
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <Border Background="{Binding DataContext.Property.CurentColor.MainColor, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CornerRadius="20 0 0 20" Margin="0,3,0,3"  MouseRightButtonUp="OpenOtherMenuCategory">
+                                        <Border Background="{Binding DataContext.Property.CurentColor.MainColor, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CornerRadius="20 0 0 20" Margin="0,3,0,3" >
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseLeftButtonUp">
                                                     <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCash}"/>
                                                     <i:InvokeCommandAction Command="{Binding DataContext.Cash.SetDefaultPropertyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                                                     <i:InvokeCommandAction Command="{Binding DataContext.Property.ShowCashCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                                </i:EventTrigger>
+                                                <i:EventTrigger EventName="MouseRightButtonUp">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.Category.ShowPopupCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                             <Border.Style>
@@ -1010,7 +1016,7 @@
                                         <i:InvokeCommandAction Command="{Binding History.PrevMounthCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                                <Image  Source="/arrow-left.png" />
+                                <Image  Source="pack://application:,,,/Images/StaticImages/arrow-left.png" />
                             </Border>
                             <TextBlock  Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" Text="{Binding History.NameMounthForCalendaer}" VerticalAlignment="Center" FontSize="18" Margin="15 0"/>
                             <Border x:Name="border5" Padding="5" Margin="5" Width="30" CornerRadius="10" Style="{StaticResource HoverBorder}" >
@@ -1019,7 +1025,7 @@
                                         <i:InvokeCommandAction Command="{Binding History.NextMounthCommand}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                                <Image  Source="/right-arrow.png"/>
+                                <Image  Source="pack://application:,,,/Images/StaticImages/right-arrow.png"/>
                             </Border>
                         </StackPanel>
                     </Grid>
@@ -1031,7 +1037,7 @@
                                 <BeginStoryboard Storyboard="{StaticResource CloseCalendar}" />
                             </EventTrigger>
                         </Border.Triggers>
-                        <Image   Source="close.png"  />
+                        <Image   Source="pack://application:,,,/Images/StaticImages/close.png"  />
                     </Border>
 
 
@@ -1147,7 +1153,7 @@
                                     <BeginStoryboard Storyboard="{StaticResource CloseHistory}" />
                                 </EventTrigger>
                             </Border.Triggers>
-                            <Image  Source="close.png"  />
+                            <Image  Source="pack://application:,,,/Images/StaticImages/close.png"  />
                         </Border>
                     </Grid>
                     
@@ -1157,10 +1163,32 @@
                                 <StackPanel/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
+                        <!--<ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
 
+                                            <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}">
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseRightButtonUp">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.Cash.ShowPopupCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                <ContentPresenter />
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>-->
+                        
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="200" MaxWidth="250" MouseRightButtonUp="OpenOtherMenuCash">
+                                <Grid Width="200" MaxWidth="250">
+                                   
+                                    
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="auto"/>
@@ -1275,15 +1303,36 @@
                         </Grid.ColumnDefinitions>
 
                         <Border BorderThickness="10" BorderBrush="{Binding Property.CurentColor.MainColor}" CornerRadius="100" Padding="5">
-                            <Image Source="/MyLogo.png" Width="80" Height="80" Margin="10"/>
+                            <Image Source="pack://application:,,,/Images/StaticImages/MyLogo.png" Width="80" Height="80" Margin="10"/>
                         </Border>
 
 
                         <StackPanel Grid.Column="1" Margin="10 30">
-                            <TextBlock Grid.Row="0" Margin="5" Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" TextWrapping="Wrap" Text="{Binding Language.PropertyOpus1}"><Hyperlink Click="Hyperlink_Click"  Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" FontStyle="Italic" FontWeight="Medium"><TextBlock Text="{Binding Language.PropertyOpusHyper1}"/></Hyperlink></TextBlock>
-                            <TextBlock  Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}"  TextWrapping="Wrap" Text="{Binding Language.PropertyOpus2}">
-                             <Hyperlink x:Name="danaHyper"  Click="Hyperlink_Click" Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" FontStyle="Italic" FontWeight="Medium"> <TextBlock Text="{Binding Language.PropertyOpusHyper2}"/></Hyperlink>
-                             </TextBlock >
+
+                            <TextBlock Grid.Row="0" Margin="5" Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}" TextWrapping="Wrap" >
+                                <TextBlock.Inlines>
+                                    <Run Text="{Binding Language.PropertyOpus1, Mode=OneWay}"/>
+                                    <Run Text="{Binding Language.PropertyOpusHyper1,  Mode=OneWay}" Cursor="Hand" FontStyle="Italic" FontWeight="Medium">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding Property.SendMessageMeCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Run>
+                                </TextBlock.Inlines>
+                            </TextBlock>
+                            <TextBlock  Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}"  TextWrapping="Wrap" >
+                                <TextBlock.Inlines>
+                                    <Run Text="{Binding Language.PropertyOpus2, Mode=OneWay}"/>
+                                    <Run Text="{Binding Language.PropertyOpusHyper2,  Mode=OneWay}" Cursor="Hand" FontStyle="Italic" FontWeight="Medium">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction Command="{Binding Property.SendMessageDanaCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Run>
+                                </TextBlock.Inlines>
+                            </TextBlock >
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -1294,7 +1343,7 @@
                             <BeginStoryboard Storyboard="{StaticResource CloseProperty}" />
                         </EventTrigger>
                     </Border.Triggers>
-                    <Image Source="close.png" Margin="5"/>
+                    <Image Source="pack://application:,,,/Images/StaticImages/close.png" Margin="5"/>
                 </Border>
             </Grid>
            
@@ -1333,7 +1382,7 @@
                                         <i:InvokeCommandAction Command="{Binding ChangeLanguageToENG}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                                <Image Source="/united-kingdom.png" Stretch="Fill"/>
+                                <Image Source="pack://application:,,,/Images/StaticImages/united-kingdom.png" Stretch="Fill"/>
                             </Border>
                             <Border Margin="5 0" Width="40" Height="40" Padding="3" CornerRadius="5" Style="{StaticResource HoverBorder}">
                                 <i:Interaction.Triggers>
@@ -1341,7 +1390,7 @@
                                         <i:InvokeCommandAction Command="{Binding  ChangeLanguageToUKR}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                                <Image Source="/ukraine.png" Stretch="Fill"/>
+                                <Image Source="pack://application:,,,/Images/StaticImages/ukraine.png" Stretch="Fill"/>
                             </Border>
                         </StackPanel>
                     </Grid>
@@ -1407,10 +1456,10 @@
 
                         <StackPanel Orientation="Horizontal" Grid.Column="1">
                             <Border x:Name="Stovb_Bord" Width="40" Height="40" Padding="3" Margin="5 0" CornerRadius="10" Style="{StaticResource HoverBorder}" MouseLeftButtonUp="ChangeGraph">
-                                <Image Source="/bar-chart.png"/>
+                                <Image Source="pack://application:,,,/Images/StaticImages/bar-chart.png"/>
                             </Border>
                             <Border x:Name="Circle_Bord" Width="40" Height="40" Padding="3" CornerRadius="10" Style="{StaticResource HoverBorder}" MouseLeftButtonUp="ChangeGraph">
-                                <Image Source="/graph.png"/>
+                                <Image Source="pack://application:,,,/Images/StaticImages/graph.png"/>
                             </Border>
                         </StackPanel>
                     </Grid>
@@ -1461,7 +1510,7 @@
                                                 </i:EventTrigger>
                                             </i:Interaction.Triggers>
                                             <Border Padding="5" CornerRadius="4">
-                                                <Image Source="/delete.png" />
+                                                <Image Source="pack://application:,,,/Images/StaticImages/delete.png" />
                                             </Border>
                                         </Border>
                                      
@@ -1485,7 +1534,7 @@
                                     <i:InvokeCommandAction Command="{Binding  Property.AddImageBackGroundCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                            <Image Source="/imageadd.png"  Width="30" Height="30"/>
+                            <Image Source="pack://application:,,,/Images/StaticImages/imageadd.png"  Width="30" Height="30"/>
                         </Border>
                         <Border Padding="5" CornerRadius="10" Margin="0,3" ToolTip="{Binding Language.PropertyImageNo}"   Style="{StaticResource HoverBorder}">
                             <i:Interaction.Triggers>
@@ -1493,7 +1542,7 @@
                                     <i:InvokeCommandAction Command="{Binding   Property.SetNullImageCommand}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                            <Image Source="/imageno.png"  Width="30" Height="30"/>
+                            <Image Source="pack://application:,,,/Images/StaticImages/imageno.png"  Width="30" Height="30"/>
                         </Border>
                     </StackPanel>
                 </Grid>
@@ -1528,7 +1577,7 @@
                                         <ei:ControlStoryboardAction Storyboard="{StaticResource CloseCreateCategory}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                                <Image   Source="close.png" />
+                                <Image   Source="pack://application:,,,/Images/StaticImages/close.png" />
                             </Border>
                         </Grid>
                     </Border>
@@ -1585,7 +1634,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/arrow-up.png" Width="20" Margin="0 0 5 0"/>
+                                        <Image Source="pack://application:,,,/Images/StaticImages/arrow-up.png" Width="20" Margin="0 0 5 0"/>
                                         <TextBlock Text="{Binding Language.CategoryProfit}" VerticalAlignment="Center"  Foreground="White"/>
                                     </StackPanel>
                                 </Border>
@@ -1602,7 +1651,7 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                     <StackPanel Orientation="Horizontal">
-                                        <Image Source="/arrow-down.png" Width="20"  Margin="0 0 5 0"/>
+                                        <Image Source="pack://application:,,,/Images/StaticImages/arrow-down.png" Width="20"  Margin="0 0 5 0"/>
                                         <TextBlock Text="{Binding Language.CategoryCosts}" VerticalAlignment="Center" Foreground="White"/>
                                     </StackPanel>
                                 </Border>
@@ -1794,7 +1843,7 @@
                                         <ei:ControlStoryboardAction Storyboard="{StaticResource CloseCreateCash}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-                                <Image Source="/close.png"  />
+                                <Image Source="pack://application:,,,/Images/StaticImages/close.png"  />
                             </Border>
                         </Grid>
                     </Border>
@@ -1884,8 +1933,14 @@
         </Grid>
 
 
-        <Popup x:Name="otherMenuCategoryPopup" Placement="MousePoint"  PopupAnimation="Fade" MouseLeave="otherMenuCategoryPopup_MouseLeave" >
+        <Popup  Placement="MousePoint"  PopupAnimation="Fade" IsOpen="{Binding Path=Category.VisibilityPopup}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction Command="{Binding Category.ClosePopupCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <StackPanel Width="100">
+               
                 <Border Padding="10" Style="{StaticResource HoverBorder}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -1906,7 +1961,12 @@
                 </Border>
             </StackPanel>
         </Popup>
-        <Popup x:Name="otherMenuCashPopup" Placement="MousePoint" MouseLeave="otherMenuCashPopup_MouseLeave">
+        <Popup Placement="MousePoint" PopupAnimation="Fade" IsOpen="{Binding Path=Cash.VisibilityPopup}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseLeave">
+                    <i:InvokeCommandAction Command="{Binding Cash.ClosePopupCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <StackPanel>
                 <Border Padding="10" Style="{StaticResource HoverBorder}">
                     <i:Interaction.Triggers>

@@ -9,28 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="arrow-down.png" />
-    <None Remove="arrow-left.png" />
-    <None Remove="arrow-side.png" />
-    <None Remove="arrow-up.png" />
-    <None Remove="back.jpg" />
-    <None Remove="bar-chart.png" />
-    <None Remove="calendar.png" />
     <None Remove="CashManagerLogo.png" />
-    <None Remove="categoryCreate.png" />
-    <None Remove="circle.png" />
-    <None Remove="close.png" />
-    <None Remove="delete.png" />
-    <None Remove="Exit.png" />
-    <None Remove="file.png" />
-    <None Remove="graph.png" />
-    <None Remove="imageadd.png" />
-    <None Remove="imageno.png" />
-    <None Remove="MyLogo.png" />
-    <None Remove="right-arrow.png" />
-    <None Remove="setting.png" />
-    <None Remove="ukraine.png" />
-    <None Remove="united-kingdom.png" />
+    <None Remove="Images\StaticImages\arrow-down.png" />
+    <None Remove="Images\StaticImages\arrow-left.png" />
+    <None Remove="Images\StaticImages\arrow-side.png" />
+    <None Remove="Images\StaticImages\arrow-up.png" />
+    <None Remove="Images\StaticImages\bar-chart.png" />
+    <None Remove="Images\StaticImages\calendar.png" />
+    <None Remove="Images\StaticImages\categoryCreate.png" />
+    <None Remove="Images\StaticImages\close.png" />
+    <None Remove="Images\StaticImages\delete.png" />
+    <None Remove="Images\StaticImages\file.png" />
+    <None Remove="Images\StaticImages\graph.png" />
+    <None Remove="Images\StaticImages\imageadd.png" />
+    <None Remove="Images\StaticImages\imageno.png" />
+    <None Remove="Images\StaticImages\Logo.png" />
+    <None Remove="Images\StaticImages\MyLogo.png" />
+    <None Remove="Images\StaticImages\right-arrow.png" />
+    <None Remove="Images\StaticImages\setting.png" />
+    <None Remove="Images\StaticImages\ukraine.png" />
+    <None Remove="Images\StaticImages\united-kingdom.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,33 +38,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\StaticImages\" />
     <Folder Include="ProgramImages\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="arrow-down.png" />
-    <Resource Include="arrow-left.png" />
-    <Resource Include="arrow-side.png" />
-    <Resource Include="arrow-up.png" />
-    <Resource Include="back.jpg" />
-    <Resource Include="bar-chart.png" />
-    <Resource Include="calendar.png" />
     <Resource Include="CashManagerLogo.png" />
-    <Resource Include="categoryCreate.png" />
-    <Resource Include="circle.png" />
-    <Resource Include="close.png" />
-    <Resource Include="delete.png" />
-    <Resource Include="Exit.png" />
-    <Resource Include="file.png" />
-    <Resource Include="graph.png" />
-    <Resource Include="imageadd.png" />
-    <Resource Include="imageno.png" />
-    <Resource Include="MyLogo.png" />
-    <Resource Include="right-arrow.png" />
-    <Resource Include="setting.png" />
-    <Resource Include="ukraine.png" />
-    <Resource Include="united-kingdom.png" />
+    <Resource Include="Images\StaticImages\arrow-down.png" />
+    <Resource Include="Images\StaticImages\arrow-left.png" />
+    <Resource Include="Images\StaticImages\arrow-side.png" />
+    <Resource Include="Images\StaticImages\arrow-up.png" />
+    <Resource Include="Images\StaticImages\bar-chart.png" />
+    <Resource Include="Images\StaticImages\calendar.png" />
+    <Resource Include="Images\StaticImages\categoryCreate.png" />
+    <Resource Include="Images\StaticImages\close.png" />
+    <Resource Include="Images\StaticImages\delete.png" />
+    <Resource Include="Images\StaticImages\file.png" />
+    <Resource Include="Images\StaticImages\graph.png" />
+    <Resource Include="Images\StaticImages\imageadd.png" />
+    <Resource Include="Images\StaticImages\imageno.png" />
+    <Resource Include="Images\StaticImages\Logo.png" />
+    <Resource Include="Images\StaticImages\MyLogo.png" />
+    <Resource Include="Images\StaticImages\right-arrow.png" />
+    <Resource Include="Images\StaticImages\setting.png" />
+    <Resource Include="Images\StaticImages\ukraine.png" />
+    <Resource Include="Images\StaticImages\united-kingdom.png" />
   </ItemGroup>
 
 </Project>

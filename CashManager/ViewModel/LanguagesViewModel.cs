@@ -219,8 +219,8 @@ namespace CashManager.ViewModel
             Eng.Strings.Add("PropertyOpus", "From yourself");
             Eng.Strings.Add("PropertyOpus1", "“Cash Manager” - is a free app to track your expenses. If you like it or you find any problem in the program, please ");
             Eng.Strings.Add("PropertyOpusHyper1", "Click to write me back.");
-            Eng.Strings.Add("PropertyOpus2", "The author of the program is “Hi” , and she worked on the design ");
-            Eng.Strings.Add("PropertyOpusHyper2", "Dana.");
+            Eng.Strings.Add("PropertyOpus2", "The author of the program is “Hi” , and she worked on the design Dana.");
+            Eng.Strings.Add("PropertyOpusHyper2", "Click to write to her");
 
             Eng.Strings.Add("ToolTipCreateCategory", "Create Category");
             Eng.Strings.Add("ToolTipCalendar", "Calendar");
@@ -291,8 +291,8 @@ namespace CashManager.ViewModel
             UKR.Strings.Add("PropertyOpus", "Від себе");
             UKR.Strings.Add("PropertyOpus1", "“Cash Manager” - це безкоштовна програма для відстеження ваших витрат. Якщо вам вона сподобається, або ви знайдете якусь проблему в програмі, будь ласка, ");
             UKR.Strings.Add("PropertyOpusHyper1", "Нажміть, щоб відписати мені.");
-            UKR.Strings.Add("PropertyOpus2", "Автором програми є “Hi”, а над дизайном працювала ");
-            UKR.Strings.Add("PropertyOpusHyper2", "Дана.");
+            UKR.Strings.Add("PropertyOpus2", "Автором програми є “Hi”, а над дизайном працювала Дана.");
+            UKR.Strings.Add("PropertyOpusHyper2", "Напиисати їй");
 
             UKR.Strings.Add("ToolTipCreateCategory", "Створити категорію");
             UKR.Strings.Add("ToolTipCalendar", "Календар");

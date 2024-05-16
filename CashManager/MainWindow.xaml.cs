@@ -28,27 +28,6 @@ namespace CashManager
 
    
 
-        private void OpenOtherMenuCategory(object sender, MouseButtonEventArgs e)
-        {
-            otherMenuCategoryPopup.IsOpen = true;
-        }
-
-        private void otherMenuCategoryPopup_MouseLeave(object sender, MouseEventArgs e)
-        {
-            otherMenuCategoryPopup.IsOpen = false;
-        }
-
-       
-
-        private void otherMenuCashPopup_MouseLeave(object sender, MouseEventArgs e)
-        {
-            otherMenuCashPopup.IsOpen = false;
-        }
-
-        private void OpenOtherMenuCash(object sender, MouseButtonEventArgs e)
-        {
-            otherMenuCashPopup.IsOpen = true;
-        }
        
 
         private void ChangeGraph(object sender, MouseButtonEventArgs e)
@@ -58,7 +37,7 @@ namespace CashManager
             {
                 diagramStovb.Visibility = Visibility.Visible;
                 diagramCircle.Visibility = Visibility.Hidden;
-                
+
             }
             else
             {
@@ -67,18 +46,6 @@ namespace CashManager
             }
         }
 
-        private void Hyperlink_Click(object sender, RoutedEventArgs e)
-        {
-            if((sender as Hyperlink).Name== "danaHyper")
-            {
-                Process.Start(new ProcessStartInfo("mailto:antoniukdana0608@gmail.com") { UseShellExecute = true });
-            }
-            else
-            {
-                Process.Start(new ProcessStartInfo("mailto:hasiukiv@gmail.com") { UseShellExecute = true });
-            }
-          
-        }
 
        
     }

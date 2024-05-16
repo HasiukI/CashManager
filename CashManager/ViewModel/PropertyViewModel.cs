@@ -5,6 +5,7 @@ using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -31,6 +32,9 @@ namespace CashManager.ViewModel
         public ICommand ShowCashCommand { get; }
         public ICommand ShowPropertyCommand { get; }
         public ICommand ShowPropertyOther { get; }
+        public ICommand SendMessageMeCommand { get; }
+        public ICommand SendMessageDanaCommand { get; }
+       
 
         public PropertyViewModel(Data data, IRepository repository)
         {
@@ -49,9 +53,14 @@ namespace CashManager.ViewModel
             ShowCashCommand = new Command(ShowCash);
             ShowPropertyCommand = new Command(ShowProperty);
             ShowPropertyOther= new Command(ShowOther);
+            SendMessageMeCommand = new Command(SendMessageMe);
+            SendMessageDanaCommand = new Command(SendMessageDana);
         }
 
         #region Property
+      
+
+
         private bool _isHideCategoriesProfit;
         public bool IsHideCategoriesProfit
         {
@@ -177,6 +186,16 @@ namespace CashManager.ViewModel
         #endregion
 
         #region Command
+
+        private void SendMessageMe()
+        {
+            Process.Start(new ProcessStartInfo("mailto:hasiukiv@gmail.com") { UseShellExecute = true });
+        }
+        private void SendMessageDana()
+        {
+            Process.Start(new ProcessStartInfo("mailto:antoniukdana0608@gmail.com") { UseShellExecute = true });
+        }
+
         private void ShowOther()
         {
             ZIndexOther = 3;
