@@ -71,7 +71,7 @@ namespace CashManager.ViewModel
             set
             {
 
-                if (value != null)
+                if (value != _curentCategory)
                 {
                     _curentCategory = value;
                     onPropertyChanged(nameof(CurentCategory));
@@ -142,9 +142,9 @@ namespace CashManager.ViewModel
                     Values = new ObservableCollection<double> {(item.Category.isCosts)? (double)-item.TotalSum : (double)item.TotalSum },
                     Fill = new SolidColorPaint(SKColor.Parse(item.Category.Color)), 
                     Stroke = null,
-                    DataLabelsSize = 16,
-                    DataLabelsPaint = new SolidColorPaint(SKColors.White),
-                    DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Middle,
+                    //DataLabelsSize = 16,
+                    //DataLabelsPaint = new SolidColorPaint(SKColors.White),
+                    //DataLabelsPosition = LiveChartsCore.Measure.DataLabelsPosition.Middle,
                     DataLabelsFormatter = (point) => item.Category.Name,
                     Name=item.Category.Name,
                     
@@ -156,10 +156,10 @@ namespace CashManager.ViewModel
                     {
                         Values = new double[] { (double)item.TotalSum },
                         Fill = new SolidColorPaint(SKColor.Parse(item.Category.Color)),
-                        DataLabelsPaint = new SolidColorPaint(SKColors.White),
-                        DataLabelsSize = 16,
-                        DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                        DataLabelsFormatter = point => item.Category.Name,
+                        //DataLabelsPaint = new SolidColorPaint(SKColors.White),
+                        //DataLabelsSize = 16,
+                        //DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                        //DataLabelsFormatter = point => item.Category.Name,
                         Name = item.Category.Name
                     }) ;
                 }
@@ -168,10 +168,10 @@ namespace CashManager.ViewModel
                     SeriesProfitCircle.Add(new PieSeries<double> { 
                         Values = new double[] { (double)item.TotalSum },
                         Fill = new SolidColorPaint(SKColor.Parse(item.Category.Color)),
-                        DataLabelsPaint = new SolidColorPaint(SKColors.White),
-                        DataLabelsSize = 16,
-                        DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
-                        DataLabelsFormatter = point => item.Category.Name,
+                        //DataLabelsPaint = new SolidColorPaint(SKColors.White),
+                        //DataLabelsSize = 16,
+                        //DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.Middle,
+                       // DataLabelsFormatter = point => item.Category.Name,
                         Name = item.Category.Name
                     });
                 }

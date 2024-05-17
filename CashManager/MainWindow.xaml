@@ -93,7 +93,16 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
+        
+        <Style x:Key="HoverOhter" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#32425a"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style x:Key="HoverCosts" TargetType="Border">
             <Setter Property="Background" Value="#e62828"/>
             <Style.Triggers>
@@ -474,6 +483,37 @@
                 <SplineDoubleKeyFrame KeyTime="00:00:00" Value="300"/>
                 <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+            
+        </Storyboard>
+        <Storyboard x:Key="SetDefaultOther">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Historyboard" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-100"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.000001" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="border1" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.000001" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="border1" Storyboard.TargetProperty="(FrameworkElement.Width)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="300"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.000001" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Calendarborder" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-61"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.000001" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Calendar" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.000001" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Calendar" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.000001" Value="-500"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Calendar" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.000001" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         
         <!--Property-->
@@ -507,7 +547,7 @@
     <Grid Background="{Binding Property.CurentColor.MainColor}">
 
         <!--Main Container-->
-        <Grid  x:Name="grid3" >
+        <Grid  x:Name="grid3" Panel.ZIndex="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition/>
@@ -590,6 +630,7 @@
                         <i:EventTrigger EventName="MouseLeftButtonUp">
                             <i:InvokeCommandAction Command="{Binding Property.ShowPropertyCommand}"/>
                             <ei:ControlStoryboardAction  Storyboard="{StaticResource ShowProperty}"/>
+                            <ei:ControlStoryboardAction  Storyboard="{StaticResource SetDefaultOther}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <Image Width="20" Height="20" Source="pack://application:,,,/Images/StaticImages/setting.png"/>
@@ -614,7 +655,6 @@
                 <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal">
                     <TextBlock FontSize="15" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" Text="{Binding Language.MainTotal}" Margin="3 0" VerticalAlignment="Bottom"/>
                     <TextBlock FontSize="18" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" FontWeight="Bold" Text="{Binding Data.MainInfo.TotalSum, StringFormat={}{0:F2}}"/>
-                    <TextBlock FontSize="16" Foreground="{Binding Property.CurentColor.ColorForFontsOnWhite}" FontWeight="Bold" Text="$" VerticalAlignment="Bottom"/>
                 </StackPanel>
             </Grid>
 
@@ -665,6 +705,17 @@
 
 
                             <Border x:Name="border6" Grid.Row="1"  Style="{StaticResource HoverProfit}" CornerRadius="0 0 10 0" HorizontalAlignment="Stretch" >
+                                <i:Interaction.Triggers>
+                                    <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesProfit}" Value="True">
+                                        <ei:ControlStoryboardAction Storyboard="{StaticResource HideProfitCategories}"/>
+                                    </ei:DataTrigger>
+                                    <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesProfit}" Value="False">
+                                        <ei:ControlStoryboardAction Storyboard="{StaticResource ShowProfitCategories}"/>
+                                    </ei:DataTrigger>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding Property.HideOrShowProfitCategorriesCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -673,17 +724,7 @@
 
                                     <TextBlock x:Name="textBlock2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" FontWeight="Medium" Foreground="White" Text="{Binding Language.CategoryProfit}"/>
                                     <Border x:Name="border3" Grid.Column="1" Padding="3" Width="30" HorizontalAlignment="Right" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                                        <i:Interaction.Triggers>
-                                            <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesProfit}" Value="True">
-                                                <ei:ControlStoryboardAction Storyboard="{StaticResource HideProfitCategories}"/>
-                                            </ei:DataTrigger>
-                                            <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesProfit}" Value="False">
-                                                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowProfitCategories}"/>
-                                            </ei:DataTrigger>
-                                            <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                <i:InvokeCommandAction Command="{Binding Property.HideOrShowProfitCategorriesCommand}"/>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
+                                        
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -726,6 +767,7 @@
 
                                     <ListBox.ItemContainerStyle>
                                         <Style TargetType="ListBoxItem">
+                                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_PreviewMouseLeftButtonDown"/>
                                             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                             <Setter Property="Template">
                                                 <Setter.Value>
@@ -839,6 +881,17 @@
                             </Grid.RowDefinitions>
 
                             <Border x:Name="border8" Grid.Row="1"  Style="{StaticResource HoverCosts}" CornerRadius="0 0 0 10">
+                                <i:Interaction.Triggers>
+                                    <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesCosts}" Value="True">
+                                        <ei:ControlStoryboardAction Storyboard="{StaticResource HideCostsCategories}"/>
+                                    </ei:DataTrigger>
+                                    <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesCosts}" Value="False">
+                                        <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCostsCategories}"/>
+                                    </ei:DataTrigger>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding Property.HideOrShowCostsCategorriesCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -846,17 +899,7 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Border x:Name="border7"  Grid.Column="0" Padding="3" Width="30" HorizontalAlignment="Left" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
-                                        <i:Interaction.Triggers>
-                                            <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesCosts}" Value="True">
-                                                <ei:ControlStoryboardAction Storyboard="{StaticResource HideCostsCategories}"/>
-                                            </ei:DataTrigger>
-                                            <ei:DataTrigger Binding="{Binding Property.IsHideCategoriesCosts}" Value="False">
-                                                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCostsCategories}"/>
-                                            </ei:DataTrigger>
-                                            <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                <i:InvokeCommandAction Command="{Binding Property.HideOrShowCostsCategorriesCommand}"/>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
+                                       
                                         <Border.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform/>
@@ -900,13 +943,22 @@
 
                                 <ListBox.ItemContainerStyle>
                                     <Style TargetType="ListBoxItem">
+                                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_PreviewMouseLeftButtonDown"/>
                                         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ListBoxItem">
-                                                    
                                                     <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}">
-                                                       
+                                                        <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCash}"/>
+                                                                <i:InvokeCommandAction Command="{Binding DataContext.Cash.SetDefaultPropertyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                                                <i:InvokeCommandAction Command="{Binding DataContext.Property.ShowCashCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                                            </i:EventTrigger>
+                                                            <i:EventTrigger EventName="MouseRightButtonUp">
+                                                                <i:InvokeCommandAction Command="{Binding DataContext.Category.ShowPopupCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
+                                                            </i:EventTrigger>
+                                                        </i:Interaction.Triggers>
                                                         <ContentPresenter />
                                                     </Border>
                                                 </ControlTemplate>
@@ -924,16 +976,7 @@
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Border Background="{Binding DataContext.Property.CurentColor.MainColor, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}" CornerRadius="20 0 0 20" Margin="0,3,0,3" >
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="MouseLeftButtonUp">
-                                                    <ei:ControlStoryboardAction Storyboard="{StaticResource ShowCreateCash}"/>
-                                                    <i:InvokeCommandAction Command="{Binding DataContext.Cash.SetDefaultPropertyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                                                    <i:InvokeCommandAction Command="{Binding DataContext.Property.ShowCashCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                                                </i:EventTrigger>
-                                                <i:EventTrigger EventName="MouseRightButtonUp">
-                                                    <i:InvokeCommandAction Command="{Binding DataContext.Category.ShowPopupCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
+                                            
                                             <Border.Style>
                                                 <Style TargetType="Border">
                                                     <Style.Triggers>
@@ -1070,7 +1113,33 @@
                         <TextBlock x:Name="TB_SundayCalendar" Foreground="Black"   Grid.Row="1" Grid.Column="6" Text="{Binding Language.CalendarSun}" VerticalAlignment="Bottom"/>
 
                         <ListBox  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="5" ItemsSource="{Binding Data.DaysHistory}" SelectedItem="{Binding Data.SelectedDayHistory}" BorderThickness="0">
-
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}" >
+                                                    <ContentPresenter />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Border" Property="Background" Value="#eaeef4" />
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding Date}" Value="{x:Static sys:DateTime.Today}">
+                                                        <Setter TargetName="Border" Property="BorderBrush" Value="#a9bad0" />
+                                                        <Setter TargetName="Border" Property="BorderThickness" Value="2" />
+                                                    </DataTrigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter TargetName="Border" Property="Background" Value="#d1dae6" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            
                             <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <UniformGrid Columns="7" />
@@ -1163,14 +1232,13 @@
                                 <StackPanel/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <!--<ListBox.ItemContainerStyle>
+                        <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
                                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListBoxItem">
-
-                                            <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}">
+                                            <Border x:Name="Border" BorderThickness="0" Background="{TemplateBinding Background}" >
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="MouseRightButtonUp">
                                                         <i:InvokeCommandAction Command="{Binding DataContext.Cash.ShowPopupCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
@@ -1178,17 +1246,20 @@
                                                 </i:Interaction.Triggers>
                                                 <ContentPresenter />
                                             </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="#eaeef4" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
-                        </ListBox.ItemContainerStyle>-->
+                        </ListBox.ItemContainerStyle>
                         
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="200" MaxWidth="250">
-                                   
-                                    
+                                <Grid Margin="5 0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="auto"/>
@@ -1263,7 +1334,7 @@
                                             <Style TargetType="TextBlock">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding Cash.Description}" Value="none">
-                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                        <Setter Property="Visibility" Value="Hidden" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -1833,9 +1904,13 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Border Margin="5" Grid.Column="0" Width="30" Padding="5" CornerRadius="20" Background="{Binding Data.CurentCategory.Color}" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                <Image  Source="{Binding Data.CurentCategory.Image}" VerticalAlignment="Center" />
-                            </Border>
+                            <StackPanel Grid.Column="0"  Orientation="Horizontal"  Margin="5">
+                                <Border  Width="30" Padding="5" CornerRadius="20" Background="{Binding Data.CurentCategory.Color}" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <Image  Source="{Binding Data.CurentCategory.Image}" VerticalAlignment="Center" />
+                                </Border>
+                                <TextBlock Margin="3 0 0 0" FontSize="14" Text="{Binding Data.CurentCategory.Name}" VerticalAlignment="Center" Foreground="{Binding Property.CurentColor.ColorForFontsOnBlack}"/>
+                            </StackPanel>
+                            
 
                             <Border  Grid.Column="1" HorizontalAlignment="Left"  Padding="5" Margin="5" Width="30" CornerRadius="10" Style="{StaticResource HoverBorder}">
                                 <i:Interaction.Triggers>

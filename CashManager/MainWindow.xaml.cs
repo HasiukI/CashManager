@@ -26,9 +26,17 @@ namespace CashManager
             InitializeComponent();
         }
 
-   
+        private void ListBoxItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var item = sender as ListBoxItem;
+            if (item != null && item.IsSelected)
+            {
+                item.IsSelected = false;
+                item.IsSelected = true;
+            }
+        }
 
-       
+
 
         private void ChangeGraph(object sender, MouseButtonEventArgs e)
         {

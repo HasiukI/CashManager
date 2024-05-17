@@ -42,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="CashManagerLogo.png" />
     <Resource Include="Images\StaticImages\arrow-down.png" />
     <Resource Include="Images\StaticImages\arrow-left.png" />
     <Resource Include="Images\StaticImages\arrow-side.png" />

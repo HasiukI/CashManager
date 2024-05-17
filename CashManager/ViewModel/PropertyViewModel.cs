@@ -198,27 +198,27 @@ namespace CashManager.ViewModel
 
         private void ShowOther()
         {
-            ZIndexOther = 3;
-            ZIndexCash = 2;
-            ZIndexCategory = 2;
-            ZIndexProperty = 2;
-        }
-        private void ShowProperty() {
-            ZIndexCash = 2;
-            ZIndexCategory = 2;
-            ZIndexProperty = 3;
+            ZIndexCash = 1;
+            ZIndexCategory = 1;
+            ZIndexProperty = 1;
             ZIndexOther = 2;
         }
+        private void ShowProperty() {
+            ZIndexCash = 1;
+            ZIndexCategory = 1;
+            ZIndexProperty = 3;
+            ZIndexOther = 1;
+        }
         private void ShowCash() {
-            ZIndexCash = 3;
-            ZIndexCategory = 2;
-            ZIndexProperty = 2;
+            ZIndexCash = 4;
+            ZIndexCategory = 1;
+            ZIndexProperty = 1;
             ZIndexOther = 2;
         }
         private void ShowCategory() {
-            ZIndexCash = 2;
-            ZIndexCategory = 3;
-            ZIndexProperty = 2;
+            ZIndexCash = 1;
+            ZIndexCategory = 4;
+            ZIndexProperty = 1;
             ZIndexOther = 2;
         }
 
