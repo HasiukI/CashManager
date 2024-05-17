@@ -1,6 +1,5 @@
-# If you want to download the program, download only the "Installer.exe" file !!!
-
-# Cash Manager - is a free app to track your expenses.
+# About propgram
+## Cash Manager - is a free app to track your expenses.
 The project was created using WPF, MVVM, Live Charts 2 technologies. All recording takes place in files on the user's computer.
 
 ### Where does the money go?
@@ -20,3 +19,9 @@ The history will show you your expenses and earnings for the day
 
 ### Don't forget to style it for yourself
 ![custImg](https://github.com/HasiukI/CashManager/blob/master/CashManager/Images/Info/Customize.png)
+
+# Install
+ In order to install the program:
+- Download the program from a zip archive or only the "Installer.exe" file.
+- You may need to disable the antivirus because the program writes to files in the local folder. 
+- Install "Installer.exe".
