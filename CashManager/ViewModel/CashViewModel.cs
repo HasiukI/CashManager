@@ -48,7 +48,17 @@ namespace CashManager.ViewModel
 
         #region Property
 
-        public string ExeptionCash { get; private set; }
+        private string _exeptionCash;
+        public string ExeptionCash { 
+            get=>_exeptionCash;
+            set { 
+                if(value != _exeptionCash)
+                {
+                    _exeptionCash= value;
+                    onPropertyChanged(nameof(ExeptionCash));
+                }
+            } 
+        }
 
         private AllInfoForCash _selectedHistory;
         public AllInfoForCash SelectedHistory
@@ -83,16 +93,25 @@ namespace CashManager.ViewModel
             }
         }
 
-        private decimal _totalPrice;
-        public decimal TotalPrice
+        private string _totalPrice;
+        public string TotalPrice
         {
             get => _totalPrice;
             set
             {
-                if (_totalPrice != value)
+               if (_totalPrice != value)
                 {
-                    _totalPrice = value;
-                    onPropertyChanged(nameof(TotalPrice));
+                    if (!string.IsNullOrEmpty(value) &&  Regex.IsMatch(value, @"[^0-9]"))
+                    {
+                        ExeptionCash = _language.CreateCashSum;
+                    }
+                    else
+                    {
+                        _totalPrice = value;
+                        ExeptionCash = "";
+                        onPropertyChanged(nameof(TotalPrice));
+                    }
+                    
                 }
             }
         }
@@ -194,13 +213,14 @@ namespace CashManager.ViewModel
 
         public void SetDefaultProperty()
         {
+            ExeptionCash = "";
             CashDescription = String.Empty;
             Count = 0;
-            TotalPrice = 0;
+            TotalPrice = string.Empty;
             if (this._data.CurentCategory.Price != 0)
             {
                 Count = 1;
-                TotalPrice = this._data.CurentCategory.Price;
+                TotalPrice = this._data.CurentCategory.Price.ToString();
             }
 
             VisibilityCreateCash = true;
@@ -211,7 +231,7 @@ namespace CashManager.ViewModel
         public void UpCount()
         {
                 Count++;
-                TotalPrice = Count * this._data.CurentCategory.Price;
+                TotalPrice = (Count * this._data.CurentCategory.Price).ToString();
         }
 
         public void DownCount()
@@ -219,14 +239,15 @@ namespace CashManager.ViewModel
                 if (Count > 1)
                 {
                     Count--;
-                    TotalPrice = Count * this._data.CurentCategory.Price;
+                    TotalPrice = (Count * this._data.CurentCategory.Price).ToString();
                 }
         }
 
 
         private void SetToUpdate()
         {
-            TotalPrice = SelectedHistory.Cash.Price;
+            ExeptionCash = "";
+            TotalPrice = SelectedHistory.Cash.Price.ToString();
             CashDescription = SelectedHistory.Cash.Description;
 
             if (SelectedHistory.Category.Price != 0)
@@ -256,7 +277,7 @@ namespace CashManager.ViewModel
             Cash cash = new Cash() { 
                 Id=this._data.MainInfo.LastIdCash++, 
                 CategoryId = this._data.CurentCategory.Id, 
-                Price = TotalPrice, 
+                Price = decimal.Parse(TotalPrice), 
                 CreatedAt = this._data.SelectedDate.Date.Add(DateTime.Now.TimeOfDay),
                 Description= this.CashDescription
             };
@@ -295,7 +316,7 @@ namespace CashManager.ViewModel
             {
                 Id = this.SelectedHistory.Cash.Id,
                 CategoryId = this.SelectedHistory.Cash.CategoryId,
-                Price = this.TotalPrice,
+                Price = decimal.Parse(this.TotalPrice),
                 CreatedAt = this.SelectedHistory.Cash.CreatedAt,
                 Count = this.Count,
                 Description = this.CashDescription
@@ -312,7 +333,7 @@ namespace CashManager.ViewModel
             ExeptionCash = "";
             onPropertyChanged(nameof(ExeptionCash));
 
-            if (TotalPrice <= 0)
+            if (decimal.Parse(TotalPrice) <= 0)
             {
                 ExeptionCash = _language.ExeptionCreateCashValue;
                 onPropertyChanged(nameof(ExeptionCash));

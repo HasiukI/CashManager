@@ -68,6 +68,7 @@ namespace CashManager.ViewModel
 
         public string ExeptionTypeCategory { get; private set; }
         public string ExeptionNameCategory { get; private set; }
+        public string ExeptionPriceCategory { get; private set; }
 
         public bool? _isCostsNewCategory;
 
@@ -86,21 +87,29 @@ namespace CashManager.ViewModel
             }
         }
 
-        private decimal _priceNewCategory;
-        public decimal PriceNewCategory
+        private string _priceNewCategory;
+        public string PriceNewCategory
         {
             get => _priceNewCategory;
             set
             {
-                if (value < 0)
-                    value = 0;
 
-                if (value != _priceNewCategory)
+                if (_priceNewCategory != value)
                 {
-                    _priceNewCategory = value;
-                  
+                    if (!string.IsNullOrEmpty(value) && Regex.IsMatch(value, @"[^0-9]"))
+                    {
+                        ExeptionPriceCategory = _language.CreateCashSum;
+                        onPropertyChanged(nameof(ExeptionPriceCategory));
+                    }
+                    else
+                    {
+                        _priceNewCategory = value;
+                        ExeptionPriceCategory = "";
+                        onPropertyChanged(nameof(PriceNewCategory));
+                        onPropertyChanged(nameof(ExeptionPriceCategory));
+                    }
+
                 }
-                onPropertyChanged(nameof(PriceNewCategory));
             }
         }
 
@@ -270,7 +279,7 @@ namespace CashManager.ViewModel
                 ExeptionNameCategory = "";
                 ExeptionTypeCategory = "";
                 NameNewCategory = "";
-                PriceNewCategory = 0;
+                PriceNewCategory = "";
                 ColorNewCategory = "";
                 ImageNewCategory = null;
                 _isCostsNewCategory = null;
@@ -298,7 +307,7 @@ namespace CashManager.ViewModel
                 Id = this._data.CurentCategory.Id,
                 Name = NameNewCategory,
                 Color = ColorNewCategory,
-                Price = PriceNewCategory,
+                Price = decimal.Parse(PriceNewCategory),
                 isCosts = _isCostsNewCategory.Value,
                 Image = ImageNewCategory,
                 ImageName = this._data.CurentCategory.ImageName,
@@ -318,7 +327,7 @@ namespace CashManager.ViewModel
 
             ColorNewCategory = this._data.CurentCategory.Color;
             _isCostsNewCategory = this._data.CurentCategory.isCosts;
-            PriceNewCategory = this._data.CurentCategory.Price;
+            PriceNewCategory = this._data.CurentCategory.Price.ToString();
             NameNewCategory = this._data.CurentCategory.Name;
             ImageNewCategory = this._data.CurentCategory.Image;
 
@@ -364,17 +373,25 @@ namespace CashManager.ViewModel
 
                 return false;
             }
-         
 
             Category category = new Category()
             {
                 Id = this._data.MainInfo.LastIdCategory++,
                 Name = _nameNewCategory,
                 isCosts = _isCostsNewCategory.Value,
-                Price = _priceNewCategory,
                 Color = _colorNewCategory,
                 IsActual = true
             };
+
+            decimal test;
+            if (decimal.TryParse(PriceNewCategory, out test))
+            {
+                category.Price = decimal.Parse(PriceNewCategory);
+            }
+            else
+            {
+                category.Price = 0;
+            }
 
             if (ColorNewCategory == null ||  String.IsNullOrEmpty(ColorNewCategory))
             {
@@ -384,7 +401,7 @@ namespace CashManager.ViewModel
             if (_imageNewCategory == null)
             {
                 category.ImageName = "default.png";
-                category.Image = new BitmapImage(new Uri(_repository.GetRootDirectory("Files") + "\\default.png", UriKind.Absolute));
+                category.Image = new BitmapImage(new Uri(_repository.GetRootDirectory("Images\\CategoryImages") + "\\default.png", UriKind.Absolute));
             }
             else
             {

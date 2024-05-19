@@ -136,6 +136,7 @@ namespace CashManager.ViewModel
         public string CreateCashCount { get => CurentLanguage.Strings["CreateCashCount"]; }
         public string CreateCashDescription { get => CurentLanguage.Strings["CreateCashDescription"]; }
         public string CreateCashDescriptionInfo { get => CurentLanguage.Strings["CreateCashDescriptionInfo"]; }
+        public string CreateCashSum { get => CurentLanguage.Strings["CreateCashSum"]; }
 
         public string CalendarMon { get => CurentLanguage.Strings["CalendarMon"]; }
         public string CalendarTue { get => CurentLanguage.Strings["CalendarTue"]; }
@@ -198,6 +199,7 @@ namespace CashManager.ViewModel
             Eng.Strings.Add("CreateCashCount", "Count");
             Eng.Strings.Add("CreateCashDescription", "Description");
             Eng.Strings.Add("CreateCashDescriptionInfo", "If you need");
+            Eng.Strings.Add("CreateCashSum", "You can only enter numbers");
 
             Eng.Strings.Add("CalendarMon", "Mon");
             Eng.Strings.Add("CalendarTue", "Tue");
@@ -267,6 +269,7 @@ namespace CashManager.ViewModel
             UKR.Strings.Add("CreateCashCount", "Кількість");
             UKR.Strings.Add("CreateCashDescription", "Опис");
             UKR.Strings.Add("CreateCashDescriptionInfo", "Якщо потрібно опис");
+            UKR.Strings.Add("CreateCashSum", "Вписувати можна виключно числа");
 
             UKR.Strings.Add("CalendarMon", "Пн");
             UKR.Strings.Add("CalendarTue", "Вт");
