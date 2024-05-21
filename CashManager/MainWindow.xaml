@@ -19,9 +19,6 @@
     </Window.DataContext>
 
     <Window.Resources>
-
-       
-
         <DataTemplate x:Key="NoneZeroTemplate">
 
             <Grid>
